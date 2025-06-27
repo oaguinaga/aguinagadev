@@ -1,13 +1,11 @@
 import { Work_Sans, Spline_Sans_Mono } from "next/font/google";
 import clsx from "clsx";
+import StyledComponentsRegistry from "@/lib/registry";
 
 import "./styles.css";
-import {
-  BLOG_TITLE,
-  BLOG_DESCRIPTION,
-  LIGHT_TOKENS,
-  DARK_TOKENS,
-} from "@/constants";
+import { BLOG_TITLE, BLOG_DESCRIPTION } from "@/constants/constants";
+import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
+import Header from "@/components/Header";
 
 const mainFont = Work_Sans({
   subsets: ["latin"],
@@ -41,14 +39,20 @@ export default function RootLayout({
     <html
       lang="en"
       style={
-        (theme === "dark" ? DARK_TOKENS : LIGHT_TOKENS) as React.CSSProperties
+        (theme === "dark" ? DARK_COLORS : LIGHT_COLORS) as React.CSSProperties
       }
       className={clsx(mainFont.variable, monoFont.variable)}
       // data-color-theme={theme}
     >
+      <head>
+        <link rel="icon" href="https://fav.farm/🤙🏽" />
+      </head>
       <body>
+        <StyledComponentsRegistry>
+          <Header initialTheme={theme} />
+          <main>{children}</main>
+        </StyledComponentsRegistry>
         {/* <Header initialTheme={theme} /> */}
-        <main>{children}</main>
         {/* <Footer /> */}
       </body>
     </html>

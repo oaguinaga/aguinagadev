@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/": ["./content/**/*"],
   },
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 export default nextConfig;

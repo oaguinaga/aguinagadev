@@ -75,7 +75,7 @@ html {
   color: var(--color-text);
   font-family: var(--font-family), sans-serif;
   letter-spacing: -0.03125em;
-  background: var(--color-backdrop-highlight);
+  background: var(--color-background);
 }
 
 body {
@@ -167,4 +167,8 @@ button {
   h3 {
     font-size: 1.5rem;
   }
+}
+
+#__next {
+  isolation: isolate;
 }
