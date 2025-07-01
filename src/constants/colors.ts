@@ -17,7 +17,7 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   colorTextDisabled: COLORS_ALIAS.neutrals_300,
   colorTextAction: COLORS_ALIAS.primary_400,
   colorTextActionHover: COLORS_ALIAS.primary_300,
-  colorTextInformation: COLORS_ALIAS.info_default,
+  colorTextInfo: COLORS_ALIAS.info_default,
   colorTextSuccess: COLORS_ALIAS.success_400,
   colorTextWarning: COLORS_ALIAS.warning_400,
   colorTextError: COLORS_ALIAS.error_300,
@@ -26,7 +26,7 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   colorTextMuted: COLORS_ALIAS.neutrals_default,
   colorSurfacePage: COLORS_ALIAS.neutrals_1100,
   colorSurfacePrimary: COLORS_ALIAS.neutrals_900,
-  colorSurfaceInformation: COLORS_ALIAS.info_1000,
+  colorSurfaceInfo: COLORS_ALIAS.info_1000,
   colorSurfaceSuccess: COLORS_ALIAS.success_1050,
   colorSurfaceWarning: COLORS_ALIAS.warning_1050,
   colorSurfaceError: COLORS_ALIAS.error_1050,
@@ -39,7 +39,7 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   colorSurfaceErrorHover: COLORS_ALIAS.error_1000,
   colorIconPrimary: COLORS_ALIAS.primary_50,
   colorIconDisabled: COLORS_ALIAS.neutrals_default,
-  colorIconInformation: COLORS_ALIAS.info_default,
+  colorIconInfo: COLORS_ALIAS.info_default,
   colorIconSuccess: COLORS_ALIAS.success_600,
   colorIconWarning: COLORS_ALIAS.warning_600,
   colorIconError: COLORS_ALIAS.error_700,
@@ -50,7 +50,7 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   colorBorderSecondary: COLORS_ALIAS.primary_300,
   colorBorderPrimary: COLORS_ALIAS.neutrals_800,
   colorBorderDisabled: COLORS_ALIAS.neutrals_800,
-  colorBorderInformation: COLORS_ALIAS.info_600,
+  colorBorderInfo: COLORS_ALIAS.info_600,
   colorBorderSuccess: COLORS_ALIAS.success_700,
   colorBorderWarning: COLORS_ALIAS.warning_700,
   colorBorderError: COLORS_ALIAS.error_600,
@@ -60,7 +60,7 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   colorBorderSuccessHover: COLORS_ALIAS.success_600,
   colorBorderWarningHover: COLORS_ALIAS.warning_600,
   colorBorderErrorHover: COLORS_ALIAS.error_default,
-  colorBorderInformationHover: COLORS_ALIAS.info_default,
+  colorBorderInfoHover: COLORS_ALIAS.info_default,
 };
 
 // For certain slices of the tree, we’ll overwrite `--color-background`. For example, a warning sidenote will set it to `--color-warning-500`. If I need to know the PAGE background within those elements, I can use this value:
@@ -72,7 +72,7 @@ export const LIGHT_COLORS_RAW: ColorMapRaw = {
   colorTextDisabled: COLORS_ALIAS.neutrals_700,
   colorTextAction: COLORS_ALIAS.primary_600,
   colorTextActionHover: COLORS_ALIAS.primary_800,
-  colorTextInformation: COLORS_ALIAS.info_default,
+  colorTextInfo: COLORS_ALIAS.info_default,
   colorTextSuccess: COLORS_ALIAS.success_800,
   colorTextWarning: COLORS_ALIAS.warning_600,
   colorTextError: COLORS_ALIAS.error_800,
@@ -81,7 +81,7 @@ export const LIGHT_COLORS_RAW: ColorMapRaw = {
   colorTextMuted: COLORS_ALIAS.neutrals_600,
   colorSurfacePage: COLORS_ALIAS.neutrals_white,
   colorSurfacePrimary: COLORS_ALIAS.neutrals_white,
-  colorSurfaceInformation: COLORS_ALIAS.info_100,
+  colorSurfaceInfo: COLORS_ALIAS.info_100,
   colorSurfaceSuccess: COLORS_ALIAS.success_50,
   colorSurfaceWarning: COLORS_ALIAS.warning_50,
   colorSurfaceError: COLORS_ALIAS.error_50,
@@ -94,7 +94,7 @@ export const LIGHT_COLORS_RAW: ColorMapRaw = {
   colorSurfaceErrorHover: COLORS_ALIAS.error_100,
   colorIconPrimary: COLORS_ALIAS.primary_1000,
   colorIconDisabled: COLORS_ALIAS.neutrals_600,
-  colorIconInformation: COLORS_ALIAS.info_default,
+  colorIconInfo: COLORS_ALIAS.info_default,
   colorIconSuccess: COLORS_ALIAS.success_700,
   colorIconWarning: COLORS_ALIAS.warning_default,
   colorIconError: COLORS_ALIAS.error_700,
@@ -105,7 +105,7 @@ export const LIGHT_COLORS_RAW: ColorMapRaw = {
   colorBorderSecondary: COLORS_ALIAS.primary_700,
   colorBorderPrimary: COLORS_ALIAS.neutrals_100,
   colorBorderDisabled: COLORS_ALIAS.neutrals_200,
-  colorBorderInformation: COLORS_ALIAS.info_400,
+  colorBorderInfo: COLORS_ALIAS.info_400,
   colorBorderSuccess: COLORS_ALIAS.success_700,
   colorBorderWarning: COLORS_ALIAS.warning_600,
   colorBorderError: COLORS_ALIAS.error_700,
@@ -115,13 +115,67 @@ export const LIGHT_COLORS_RAW: ColorMapRaw = {
   colorBorderSuccessHover: COLORS_ALIAS.success_800,
   colorBorderWarningHover: COLORS_ALIAS.warning_700,
   colorBorderErrorHover: COLORS_ALIAS.error_800,
-  colorBorderInformationHover: COLORS_ALIAS.info_default,
+  colorBorderInfoHover: COLORS_ALIAS.info_default,
 };
 
 LIGHT_COLORS_RAW.colorPageBackground = LIGHT_COLORS_RAW.colorSurfacePage;
 
 export const LIGHT_COLORS = createStyleObject(LIGHT_COLORS_RAW);
 export const DARK_COLORS = createStyleObject(DARK_COLORS_MAP);
+
+export const GROUPED_LIGHT_COLORS = groupColors(LIGHT_COLORS);
+export const GROUPED_DARK_COLORS = groupColors(DARK_COLORS);
+
+function groupColors(colors: ColorMap) {
+  const predefinedKeys = [
+    "info",
+    "success",
+    "warning",
+    "error",
+    "action",
+    "disabled",
+    "primary",
+    "secondary",
+    "muted",
+    "body",
+  ];
+
+  return Object.entries(colors).reduce((acc, [name, value]) => {
+    // Extract group and key from CSS variable name
+    // Example: "--color-text-success" -> group: "success", key: "text"
+    const match = name.match(/--color-(\w+)-(.+)/);
+    if (match) {
+      const [, key, rest] = match;
+
+      // Find the predefined key in the rest of the name
+      let group = "other";
+      for (const predefinedKey of predefinedKeys) {
+        if (rest.includes(predefinedKey)) {
+          group = predefinedKey;
+          break;
+        }
+      }
+
+      // If no predefined key found, use the first part as group
+      if (group === "other") {
+        group = key;
+      }
+
+      // Create the final key by combining key and remaining parts
+      const finalKey = rest.replace(group, "").replace(/^-+|-+$/g, "") || key;
+
+      // Initialize group if it doesn't exist
+      if (!acc[group]) {
+        acc[group] = {};
+      }
+
+      // Add the color to the group
+      acc[group][finalKey] = value;
+    }
+
+    return acc;
+  }, {} as Record<string, Record<string, string>>);
+}
 
 // This method takes the raw H/S/L values and produces an object that can be passed to `style`:
 // Input: { gray500: [210, 10, 90] }

@@ -1,0 +1,33 @@
+import { ColorPalette, ColorItem } from "@storybook/addon-docs/blocks";
+import {
+  GROUPED_LIGHT_COLORS,
+  GROUPED_DARK_COLORS,
+} from "../../constants/colors";
+
+# Design Tokens - Light Theme
+
+<ColorPalette hideColorCode>
+  {Object.entries(GROUPED_LIGHT_COLORS).map(([id, colors]) => {
+    console.log("colors", colors);
+
+    return (
+      <ColorItem key={id} title={id.charAt(0).toUpperCase() + id.slice(1)} colors={colors}  />
+    );
+
+})}
+
+</ColorPalette>
+
+# Design Tokens - Dark Theme
+
+<ColorPalette hideColorCode>
+  {Object.entries(GROUPED_DARK_COLORS).map(([id, colors]) => {
+    return (
+      <ColorItem
+        key={id}
+        title={id.charAt(0).toUpperCase() + id.slice(1)}
+        colors={colors}
+      />
+    );
+  })}
+</ColorPalette>
