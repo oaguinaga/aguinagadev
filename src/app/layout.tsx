@@ -34,6 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const theme = "dark";
+  console.log("DARK_COLORS", DARK_COLORS);
 
   return (
     <html
