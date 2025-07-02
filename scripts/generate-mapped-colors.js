@@ -5,90 +5,135 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function isColorValue(obj) {
+/**
+ * Checks if an object represents a color token with light and dark values
+ */
+function isColorToken(tokenObject) {
   return (
-    obj &&
-    obj.type === "color" &&
-    obj.values &&
-    obj.values.light &&
-    obj.values.dark
+    tokenObject &&
+    tokenObject.type === "color" &&
+    tokenObject.values &&
+    tokenObject.values.light &&
+    tokenObject.values.dark
   );
 }
 
-function transformAliasToReference(aliasString, propertyPath) {
-  // Only handle "alias:" strings
-  if (aliasString.startsWith("alias:")) {
-    const aliasPath = aliasString.replace("alias:", "");
-    const aliasKey = aliasPath.replace("/", "_");
-    return `COLORS_ALIAS.${aliasKey}`;
+/**
+ * Converts a design token path to a snake_case variable name
+ * Example: "text-action-hover" becomes "text_action_hover"
+ */
+function convertToSnakeCase(tokenPath) {
+  return tokenPath.replace(/-/g, "_");
+}
+
+/**
+ * Converts an alias reference to a TypeScript constant reference
+ * Example: "alias:primary/default" becomes "COLORS_ALIAS.primary_default"
+ */
+function convertAliasToConstant(aliasValue) {
+  if (!aliasValue.startsWith("alias:")) {
+    console.warn(
+      `⚠️  Unexpected alias format: "${aliasValue}" (expected "alias:...")`
+    );
+    return `// INVALID: ${aliasValue}`;
   }
 
-  // Log any property that doesn't follow the expected "alias:" format
-  console.warn(
-    `⚠️  Property "${propertyPath}" has unexpected value: "${aliasString}" (expected format: "alias:...")`
-  );
-  return `// INVALID: ${aliasString}`;
+  const aliasPath = aliasValue.replace("alias:", "");
+  const constantName = aliasPath.replace("/", "_");
+  return `COLORS_ALIAS.${constantName}`;
 }
 
-function extractColorVariables(variables, parentKey = "") {
-  const lightColors = {};
-  const darkColors = {};
+/**
+ * Recursively finds all color tokens in a nested object structure
+ * Returns an array of color token information
+ */
+function findAllColorTokens(tokenStructure) {
+  const colorTokens = [];
 
-  function traverse(obj, currentPath) {
-    for (const [key, value] of Object.entries(obj)) {
-      // Convert key to snake_case (replace hyphens with underscores)
-      const snakeKey = key.replace(/-/g, "_");
-      const fullPath = currentPath ? `${currentPath}_${snakeKey}` : snakeKey;
+  function searchForColorTokens(currentObject, pathSoFar = []) {
+    for (const [tokenName, tokenValue] of Object.entries(currentObject)) {
+      if (isColorToken(tokenValue)) {
+        // Found a color token - add it to our collection
+        const snakeCaseTokenName = convertToSnakeCase(tokenName);
+        const fullTokenPath = [...pathSoFar, snakeCaseTokenName];
+        const colorVariableName = `color_${fullTokenPath.join("_")}`;
 
-      if (isColorValue(value)) {
-        const colorKey = `color_${fullPath}`;
-        const lightPropertyPath = `${fullPath}.light`;
-        const darkPropertyPath = `${fullPath}.dark`;
-        lightColors[colorKey] = transformAliasToReference(
-          value.values.light,
-          lightPropertyPath
-        );
-        darkColors[colorKey] = transformAliasToReference(
-          value.values.dark,
-          darkPropertyPath
-        );
-      } else if (typeof value === "object" && value !== null) {
-        traverse(value, fullPath);
+        colorTokens.push({
+          variableName: colorVariableName,
+          lightValue: tokenValue.values.light,
+          darkValue: tokenValue.values.dark,
+        });
+      } else if (typeof tokenValue === "object" && tokenValue !== null) {
+        // This is a nested group - search deeper
+        const snakeCaseTokenName = convertToSnakeCase(tokenName);
+        const newPath = [...pathSoFar, snakeCaseTokenName];
+        searchForColorTokens(tokenValue, newPath);
       }
     }
   }
 
-  traverse(variables, parentKey);
-
-  return { light: lightColors, dark: darkColors };
+  searchForColorTokens(tokenStructure);
+  return colorTokens;
 }
 
-function generateTypeScriptFile(lightColors, darkColors) {
-  const lightEntries = Object.entries(lightColors)
-    .map(([key, value]) => `  ${key}: ${value},`)
+/**
+ * Takes color tokens and creates separate light and dark color maps
+ */
+function createColorMaps(colorTokens) {
+  const lightColorMap = {};
+  const darkColorMap = {};
+
+  for (const token of colorTokens) {
+    lightColorMap[token.variableName] = convertAliasToConstant(
+      token.lightValue
+    );
+    darkColorMap[token.variableName] = convertAliasToConstant(token.darkValue);
+  }
+
+  return {
+    light: lightColorMap,
+    dark: darkColorMap,
+  };
+}
+
+/**
+ * Generates the TypeScript file content with the color maps
+ */
+function generateTypeScriptContent(lightColorMap, darkColorMap) {
+  const lightColorEntries = Object.entries(lightColorMap)
+    .map(
+      ([variableName, aliasReference]) =>
+        `  ${variableName}: ${aliasReference},`
+    )
     .join("\n");
 
-  const darkEntries = Object.entries(darkColors)
-    .map(([key, value]) => `  ${key}: ${value},`)
+  const darkColorEntries = Object.entries(darkColorMap)
+    .map(
+      ([variableName, aliasReference]) =>
+        `  ${variableName}: ${aliasReference},`
+    )
     .join("\n");
 
   return `import { COLORS_ALIAS } from "@/assets/tokens/constants/colors-alias";
-  export type ColorTuple = [number, number, number, number?];
-  export type ColorMapRaw = Record<string, ColorTuple>;
+export type ColorTuple = [number, number, number, number?];
+export type ColorMapRaw = Record<string, ColorTuple>;
 
 export const LIGHT_COLORS_MAP: ColorMapRaw = {
-${lightEntries}
+${lightColorEntries}
 };
 
 export const DARK_COLORS_MAP: ColorMapRaw = {
-${darkEntries}
+${darkColorEntries}
 };
 `;
 }
 
+/**
+ * Main function that orchestrates the entire process
+ */
 function main() {
-  // Path to the input JSON file
-  const inputPath = path.join(
+  // Define file paths
+  const inputFilePath = path.join(
     __dirname,
     "..",
     "src",
@@ -98,8 +143,7 @@ function main() {
     "mapped-colors.json"
   );
 
-  // Path to the output TypeScript file (sibling to the input directory)
-  const outputPath = path.join(
+  const outputFilePath = path.join(
     __dirname,
     "..",
     "src",
@@ -110,36 +154,39 @@ function main() {
   );
 
   try {
-    // Read and parse the JSON file
-    const jsonContent = fs.readFileSync(inputPath, "utf-8");
-    const data = JSON.parse(jsonContent);
+    const jsonFileContent = fs.readFileSync(inputFilePath, "utf-8");
+    const designTokenData = JSON.parse(jsonFileContent);
 
-    // Find the "mapped" collection
-    const mappedCollection = data.collections.find((c) => c.name === "mapped");
+    const mappedCollection = designTokenData.collections.find(
+      (collection) => collection.name === "mapped"
+    );
+
     if (!mappedCollection) {
-      throw new Error('Could not find "mapped" collection in the JSON file');
+      throw new Error('Could not find "mapped" collection in the input file');
     }
 
-    // Extract color variables
-    const { light, dark } = extractColorVariables(mappedCollection.variables);
+    console.log("🎨 Extracting color tokens...");
+    const allColorTokens = findAllColorTokens(mappedCollection.variables);
 
-    // Generate TypeScript content
-    const tsContent = generateTypeScriptFile(light, dark);
+    console.log("🗺️  Creating color maps...");
+    const { light: lightColorMap, dark: darkColorMap } =
+      createColorMaps(allColorTokens);
 
-    // Ensure output directory exists
-    const outputDir = path.dirname(outputPath);
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
+    const typeScriptContent = generateTypeScriptContent(
+      lightColorMap,
+      darkColorMap
+    );
+
+    const outputDirectory = path.dirname(outputFilePath);
+    if (!fs.existsSync(outputDirectory)) {
+      fs.mkdirSync(outputDirectory, { recursive: true });
     }
 
-    // Write the TypeScript file
-    fs.writeFileSync(outputPath, tsContent, "utf-8");
+    fs.writeFileSync(outputFilePath, typeScriptContent, "utf-8");
 
-    console.log(`✅ Successfully generated ${outputPath}`);
+    console.log(`✅ Successfully generated ${outputFilePath}`);
     console.log(
-      `📊 Generated ${
-        Object.keys(light).length
-      } color mappings for both light and dark themes`
+      `📊 Generated ${allColorTokens.length} color mappings for both light and dark themes`
     );
   } catch (error) {
     console.error("❌ Error generating mapped colors:", error);
@@ -147,5 +194,4 @@ function main() {
   }
 }
 
-// Run main function if this file is executed directly
 main();

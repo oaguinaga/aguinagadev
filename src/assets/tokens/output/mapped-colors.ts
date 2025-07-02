@@ -1,6 +1,6 @@
 import { COLORS_ALIAS } from "@/assets/tokens/constants/colors-alias";
-  export type ColorTuple = [number, number, number, number?];
-  export type ColorMapRaw = Record<string, ColorTuple>;
+export type ColorTuple = [number, number, number, number?];
+export type ColorMapRaw = Record<string, ColorTuple>;
 
 export const LIGHT_COLORS_MAP: ColorMapRaw = {
   color_text_headings: COLORS_ALIAS.neutrals_1000,
