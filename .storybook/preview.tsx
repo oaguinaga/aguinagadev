@@ -2,16 +2,7 @@ import type { Preview } from "@storybook/nextjs";
 import React from "react";
 import "./global.css";
 import { DARK_COLORS, LIGHT_COLORS } from "../src/constants/colors";
-
-// Apply CSS variables to the <html> element
-const applyThemeVariables = (theme: "light" | "dark") => {
-  const vars = theme === "dark" ? DARK_COLORS : LIGHT_COLORS;
-  const root = document.documentElement;
-
-  Object.entries(vars).forEach(([key, value]) => {
-    root.style.setProperty(key, value);
-  });
-};
+import { applyThemeToRoot } from "../src/utils/theme";
 
 // Add a global toolbar control for theme switching
 export const globalTypes = {
@@ -28,12 +19,15 @@ export const globalTypes = {
 
 // Add a decorator to apply the theme on every story render
 const withTheme = (Story, context) => {
-  applyThemeVariables(context.globals.theme);
+  applyThemeToRoot(context.globals.theme);
   return <Story />;
 };
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      toc: true, // 👈 Enables the table of contents
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -52,6 +46,7 @@ const preview: Preview = {
     },
   },
   decorators: [withTheme],
+  tags: ["autodocs"],
 };
 
 export default preview;

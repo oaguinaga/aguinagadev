@@ -66,6 +66,11 @@ html {
   --font-size-h5: 1.5rem;
   --font-size-h6: 1.25rem;
 
+  /* Headings mobile */
+  --font-size-h1-mobile: 2.25rem;
+  --font-size-h2-mobile: 1.75rem;
+  --font-size-h3-mobile: 1.5rem;
+
   /* Line heights */
   --line-height-body-xs: 1rem;
   --line-height-body-sm: 1.25rem;
@@ -122,6 +127,8 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
 }
 
 body::before {
@@ -151,23 +158,27 @@ code {
   font-family: var(--font-family-mono);
 }
 h1 {
-  font-size: 1.75rem;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
   font-weight: 650;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
   margin-top: 2em;
   margin-bottom: 0.5em;
   font-weight: 600;
 }
 h3 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
   margin-top: 2em;
   margin-bottom: 0.5em;
   font-weight: 500;
 }
 p {
-  font-size: 1.25rem;
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
   margin-bottom: 1.5em;
 }
 p code {
@@ -195,14 +206,14 @@ button {
 
 @media (min-width: 35rem) {
   h1 {
-    font-size: 2.25rem;
+    font-size: var(--font-size-h1-mobile);
   }
 
   h2 {
-    font-size: 1.75rem;
+    font-size: var(--font-size-h2-mobile);
   }
   h3 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-h3-mobile);
   }
 }
 

@@ -1,4 +1,8 @@
-import { COLORS_ALIAS } from "@/assets/tokens/constants/colors-alias";
+import {
+  LIGHT_COLORS_MAP,
+  DARK_COLORS_MAP as IMPORTED_DARK_COLORS_MAP,
+} from "@/assets/tokens/output/mapped-colors";
+
 import { transformObject } from "@/utils";
 import { ColorMapRaw, ColorTuple } from "@/assets/tokens/output/mapped-colors";
 
@@ -8,113 +12,12 @@ export interface ColorMap {
   [key: `--${string}`]: string;
 }
 
-export const DARK_COLORS_MAP: ColorMapRaw = {
-  color_text_headings: COLORS_ALIAS.neutrals_50,
-  color_text_body: COLORS_ALIAS.neutrals_100,
-  color_text_disabled: COLORS_ALIAS.neutrals_300,
-  color_text_action: COLORS_ALIAS.primary_400,
-  color_text_action_hover: COLORS_ALIAS.primary_300,
-  color_text_info: COLORS_ALIAS.info_default,
-  color_text_success: COLORS_ALIAS.success_400,
-  color_text_warning: COLORS_ALIAS.warning_400,
-  color_text_error: COLORS_ALIAS.error_300,
-  color_text_on_action: COLORS_ALIAS.neutrals_black,
-  color_text_on_disabled: COLORS_ALIAS.neutrals_200,
-  color_text_muted: COLORS_ALIAS.neutrals_default,
-  color_surface_page: COLORS_ALIAS.neutrals_1100,
-  color_surface_primary: COLORS_ALIAS.neutrals_900,
-  color_surface_info: COLORS_ALIAS.info_1000,
-  color_surface_success: COLORS_ALIAS.success_1050,
-  color_surface_warning: COLORS_ALIAS.warning_1050,
-  color_surface_error: COLORS_ALIAS.error_1050,
-  color_surface_disabled: COLORS_ALIAS.neutrals_900,
-  color_surface_action: COLORS_ALIAS.primary_default,
-  color_surface_action_hover: COLORS_ALIAS.primary_400,
-  color_surface_action_hover_light: COLORS_ALIAS.primary_1000,
-  color_surface_success_hover: COLORS_ALIAS.success_1000,
-  color_surface_warning_hover: COLORS_ALIAS.warning_1000,
-  color_surface_error_hover: COLORS_ALIAS.error_1000,
-  color_icon_primary: COLORS_ALIAS.primary_50,
-  color_icon_disabled: COLORS_ALIAS.neutrals_default,
-  color_icon_info: COLORS_ALIAS.info_default,
-  color_icon_success: COLORS_ALIAS.success_600,
-  color_icon_warning: COLORS_ALIAS.warning_600,
-  color_icon_error: COLORS_ALIAS.error_700,
-  color_icon_accent: COLORS_ALIAS.accent_default,
-  color_icon_action: COLORS_ALIAS.primary_400,
-  color_icon_on_action: COLORS_ALIAS.neutrals_black,
-  color_icon_action_hover: COLORS_ALIAS.primary_default,
-  color_border_secondary: COLORS_ALIAS.primary_300,
-  color_border_primary: COLORS_ALIAS.neutrals_800,
-  color_border_disabled: COLORS_ALIAS.neutrals_800,
-  color_border_info: COLORS_ALIAS.info_600,
-  color_border_success: COLORS_ALIAS.success_700,
-  color_border_warning: COLORS_ALIAS.warning_700,
-  color_border_error: COLORS_ALIAS.error_600,
-  color_border_action: COLORS_ALIAS.primary_700,
-  color_border_action_hover: COLORS_ALIAS.primary_default,
-  color_border_action_focus: COLORS_ALIAS.primary_700,
-  color_border_success_hover: COLORS_ALIAS.success_600,
-  color_border_warning_hover: COLORS_ALIAS.warning_600,
-  color_border_error_hover: COLORS_ALIAS.error_default,
-  color_border_info_hover: COLORS_ALIAS.info_default,
-};
+// Create local copies that we can modify
+const LIGHT_COLORS_RAW: ColorMapRaw = { ...LIGHT_COLORS_MAP };
+const DARK_COLORS_MAP: ColorMapRaw = { ...IMPORTED_DARK_COLORS_MAP };
 
 // For certain slices of the tree, we'll overwrite `--color-background`. For example, a warning sidenote will set it to `--color-warning-500`. If I need to know the PAGE background within those elements, I can use this value:
 DARK_COLORS_MAP.color_page_background = DARK_COLORS_MAP.color_surface_page;
-
-export const LIGHT_COLORS_RAW: ColorMapRaw = {
-  color_text_headings: COLORS_ALIAS.neutrals_1000,
-  color_text_body: COLORS_ALIAS.neutrals_900,
-  color_text_disabled: COLORS_ALIAS.neutrals_700,
-  color_text_action: COLORS_ALIAS.primary_600,
-  color_text_action_hover: COLORS_ALIAS.primary_800,
-  color_text_info: COLORS_ALIAS.info_default,
-  color_text_success: COLORS_ALIAS.success_800,
-  color_text_warning: COLORS_ALIAS.warning_600,
-  color_text_error: COLORS_ALIAS.error_800,
-  color_text_on_action: COLORS_ALIAS.neutrals_white,
-  color_text_on_disabled: COLORS_ALIAS.neutrals_800,
-  color_text_muted: COLORS_ALIAS.neutrals_600,
-  color_surface_page: COLORS_ALIAS.neutrals_white,
-  color_surface_primary: COLORS_ALIAS.neutrals_white,
-  color_surface_info: COLORS_ALIAS.info_100,
-  color_surface_success: COLORS_ALIAS.success_50,
-  color_surface_warning: COLORS_ALIAS.warning_50,
-  color_surface_error: COLORS_ALIAS.error_50,
-  color_surface_disabled: COLORS_ALIAS.neutrals_50,
-  color_surface_action: COLORS_ALIAS.primary_default,
-  color_surface_action_hover: COLORS_ALIAS.primary_600,
-  color_surface_action_hover_light: COLORS_ALIAS.primary_50,
-  color_surface_success_hover: COLORS_ALIAS.success_100,
-  color_surface_warning_hover: COLORS_ALIAS.warning_100,
-  color_surface_error_hover: COLORS_ALIAS.error_100,
-  color_icon_primary: COLORS_ALIAS.primary_1000,
-  color_icon_disabled: COLORS_ALIAS.neutrals_600,
-  color_icon_info: COLORS_ALIAS.info_default,
-  color_icon_success: COLORS_ALIAS.success_700,
-  color_icon_warning: COLORS_ALIAS.warning_default,
-  color_icon_error: COLORS_ALIAS.error_700,
-  color_icon_accent: COLORS_ALIAS.error_default,
-  color_icon_action: COLORS_ALIAS.primary_600,
-  color_icon_on_action: COLORS_ALIAS.neutrals_white,
-  color_icon_action_hover: COLORS_ALIAS.primary_800,
-  color_border_secondary: COLORS_ALIAS.primary_700,
-  color_border_primary: COLORS_ALIAS.neutrals_100,
-  color_border_disabled: COLORS_ALIAS.neutrals_200,
-  color_border_info: COLORS_ALIAS.info_400,
-  color_border_success: COLORS_ALIAS.success_700,
-  color_border_warning: COLORS_ALIAS.warning_600,
-  color_border_error: COLORS_ALIAS.error_700,
-  color_border_action: COLORS_ALIAS.primary_700,
-  color_border_action_hover: COLORS_ALIAS.primary_default,
-  color_border_action_focus: COLORS_ALIAS.primary_default,
-  color_border_success_hover: COLORS_ALIAS.success_800,
-  color_border_warning_hover: COLORS_ALIAS.warning_700,
-  color_border_error_hover: COLORS_ALIAS.error_800,
-  color_border_info_hover: COLORS_ALIAS.info_default,
-};
-
 LIGHT_COLORS_RAW.color_page_background = LIGHT_COLORS_RAW.color_surface_page;
 
 export const LIGHT_COLORS = createStyleObject(LIGHT_COLORS_RAW);

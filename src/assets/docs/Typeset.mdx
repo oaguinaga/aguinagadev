@@ -8,20 +8,24 @@ export const typography = {
   },
   weight: {
     regular: '400',
+    semibold: '600',
     bold: '700',
-    extrabold: '800',
-    black: '900',
   },
   size: {
-    s1: 12,
-    s2: 14,
-    s3: 16,
-    m1: 20,
-    m2: 24,
-    m3: 28,
-    l1: 32,
-    l2: 40,
-    l3: 48,
+    body: {
+      xs: 8,
+      sm: 12,
+      md: 16,
+      lg: 20,
+    },
+    heading: {
+      h1: 60,
+      h2: 48,
+      h3: 40,
+      h4: 32,
+      h5: 24,
+      h6: 20,
+    },
   },
 };
  
@@ -32,18 +36,29 @@ export const SampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing el
 **Font:** Work Sans
  
 **Weights:** 400(regular), 700(bold), 800(extrabold), 900(black)
- 
+
+## Body
+
 <Typeset
   fontSizes={[
-    Number(typography.size.s1),
-    Number(typography.size.s2),
-    Number(typography.size.s3),
-    Number(typography.size.m1),
-    Number(typography.size.m2),
-    Number(typography.size.m3),
-    Number(typography.size.l1),
-    Number(typography.size.l2),
-    Number(typography.size.l3),
+    Number(typography.size.body.xs),
+    Number(typography.size.body.sm),
+    Number(typography.size.body.md),
+    Number(typography.size.body.lg),
+  ]}
+  fontWeight={typography.weight.regular}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.heading.h1),
+    Number(typography.size.heading.h2),
+    Number(typography.size.heading.h3),
+    Number(typography.size.heading.h4),
+    Number(typography.size.heading.h5),
+    Number(typography.size.heading.h6),
   ]}
   fontWeight={typography.weight.regular}
   sampleText={SampleText}

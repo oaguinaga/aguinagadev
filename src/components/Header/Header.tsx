@@ -4,7 +4,7 @@ import * as React from "react";
 import VisuallyHidden from "../VisuallyHidden";
 import styled from "styled-components";
 import { COLOR_THEME_COOKIE_NAME, ColorTheme } from "@/constants/constants";
-import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
+import { applyThemeToRoot } from "@/utils/theme";
 import Cookie from "js-cookie";
 import { Moon, Sun } from "react-feather";
 import Logo from "@/components/Logo";
@@ -27,13 +27,7 @@ function Header({
 
     await Cookie.set(COLOR_THEME_COOKIE_NAME, nextTheme, { expires: 1000 });
 
-    const COLORS = nextTheme === "light" ? LIGHT_COLORS : DARK_COLORS;
-    const root = document.documentElement;
-    root.setAttribute("data-color-theme", nextTheme);
-
-    Object.entries(COLORS).forEach(([key, value]) => {
-      root.style.setProperty(key, value);
-    });
+    applyThemeToRoot(nextTheme);
   }
 
   return (
