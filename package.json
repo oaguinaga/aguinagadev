@@ -2,13 +2,15 @@
   "name": "aguinagadev",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate:mapped-colors": "node scripts/generate-mapped-colors.js"
   },
   "dependencies": {
     "bright": "^1.0.0",

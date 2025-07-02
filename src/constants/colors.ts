@@ -1,10 +1,8 @@
+import { COLORS_ALIAS } from "@/assets/tokens/constants/colors-alias";
 import { transformObject } from "@/utils";
-import { COLORS_ALIAS } from "./colors-alias";
+import { ColorMapRaw, ColorTuple } from "@/assets/tokens/output/mapped-colors";
 
 const kebab = (str: string) => str.replace(/_/g, "-");
-
-export type ColorTuple = [number, number, number, number?];
-type ColorMapRaw = Record<string, ColorTuple>;
 
 export interface ColorMap {
   [key: `--${string}`]: string;

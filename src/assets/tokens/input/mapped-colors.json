@@ -229,8 +229,8 @@
           "accent": {
             "type": "color",
             "values": {
-              "light": "brand:color/watermelon/default",
-              "dark": "brand:color/watermelon/default"
+              "light": "alias:accent/default",
+              "dark": "alias:accent/default"
             }
           },
           "action": {
