@@ -1,4 +1,4 @@
-import { Work_Sans, Spline_Sans_Mono } from "next/font/google";
+import { Work_Sans, Poppins, Space_Mono } from "next/font/google";
 import clsx from "clsx";
 import StyledComponentsRegistry from "@/lib/registry";
 
@@ -13,10 +13,18 @@ const mainFont = Work_Sans({
   weight: "variable",
   variable: "--font-family",
 });
-const monoFont = Spline_Sans_Mono({
+
+const headingFont = Poppins({
   subsets: ["latin"],
   display: "fallback",
-  weight: "variable",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-family-heading",
+});
+
+const monoFont = Space_Mono({
+  subsets: ["latin"],
+  display: "fallback",
+  weight: ["400", "700"],
   variable: "--font-family-mono",
 });
 
@@ -42,8 +50,12 @@ export default function RootLayout({
       style={
         (theme === "dark" ? DARK_COLORS : LIGHT_COLORS) as React.CSSProperties
       }
-      className={clsx(mainFont.variable, monoFont.variable)}
-      // data-color-theme={theme}
+      className={clsx(
+        mainFont.variable,
+        headingFont.variable,
+        monoFont.variable
+      )}
+      data-color-theme={theme}
     >
       <head>
         <link rel="icon" href="https://fav.farm/🤙🏽" />
@@ -53,8 +65,6 @@ export default function RootLayout({
           <Header initialTheme={theme} />
           <main>{children}</main>
         </StyledComponentsRegistry>
-        {/* <Header initialTheme={theme} /> */}
-        {/* <Footer /> */}
       </body>
     </html>
   );
