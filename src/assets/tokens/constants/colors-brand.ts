@@ -1,4 +1,4 @@
-import { ColorTuple } from "./colors";
+import { ColorTuple } from "@/constants/colors";
 
 export const COLORS_BRAND: Record<string, ColorTuple> = {
   // grays
