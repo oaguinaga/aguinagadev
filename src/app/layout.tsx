@@ -52,7 +52,7 @@ export default function RootLayout({
       className={clsx(
         mainFont.variable,
         headingFont.variable,
-        monoFont.variable,
+        monoFont.variable
       )}
       data-color-theme={theme}
     >

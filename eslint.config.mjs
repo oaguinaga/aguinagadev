@@ -13,14 +13,8 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.config({
-    extends: ["next/core-web-vitals", "next/typescript", "prettier"],
-    rules: {
-      "react/no-unescaped-entities": "off",
-    },
-  }),
-
-  ...storybook.configs["flat/recommended"],
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...storybook.configs["flat/recommended"]
 ];
 
 export default eslintConfig;

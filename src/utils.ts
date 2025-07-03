@@ -16,7 +16,7 @@ export const range = (start: number, end?: number, step: number = 1) => {
 // This method is like `transformValues`, except we can change both the value *and* keys.
 export const transformObject = (
   obj: PlainObject,
-  callback: (key: string, value: unknown) => [string, unknown],
+  callback: (key: string, value: unknown) => [string, unknown]
 ) => {
   if (typeof obj !== "object") {
     return obj;
@@ -48,7 +48,7 @@ export function sample<T>(arr: Array<T>, len = 1): Array<T> {
 export const random = (
   min: number,
   max: number,
-  { rounded }: { rounded: boolean } = { rounded: true },
+  { rounded }: { rounded: boolean } = { rounded: true }
 ) => {
   const partialVal = Math.random() * (max - min);
 
