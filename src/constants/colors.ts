@@ -1,5 +1,6 @@
 import type {
-  ColorMapRaw, ColorTuple,
+  ColorMapRaw,
+  ColorTuple,
 } from "@/assets/tokens/output/mapped-colors";
 
 import {

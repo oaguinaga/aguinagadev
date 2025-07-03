@@ -2,7 +2,7 @@
 // pnpm dlx @antfu/eslint-config@latest
 import antfu from "@antfu/eslint-config";
 import nextPlugin from "@next/eslint-plugin-next";
-import storybook from "eslint-plugin-storybook";
+import storybook from "eslint-plugin-storybook"
 
 export default antfu(
   {
