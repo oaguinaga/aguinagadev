@@ -29,66 +29,71 @@ export const GROUPED_DARK_COLORS = groupColors(DARK_COLORS);
 function groupColors(colors: ColorMap) {
   const specialKeys = ["action", "disabled", "body", "muted"];
 
-  return Object.entries(colors).reduce((acc, [name, value]) => {
-    // Extract parts from CSS variable name
-    // Example: "--color-text-action" -> ["color", "text", "action"]
-    const parts = name.replace(/^--/, "").split("-");
+  return Object.entries(colors).reduce(
+    (acc, [name, value]) => {
+      // Extract parts from CSS variable name
+      // Example: "--color-text-action" -> ["color", "text", "action"]
+      const parts = name.replace(/^--/, "").split("-");
 
-    if (parts.length >= 3 && parts[0] === "color") {
-      const subgroup = parts[1]; // text, surface, icons, border, etc.
-      const colorName = parts.slice(2).join("_"); // action, action_hover, etc.
+      if (parts.length >= 3 && parts[0] === "color") {
+        const subgroup = parts[1]; // text, surface, icons, border, etc.
+        const colorName = parts.slice(2).join("_"); // action, action_hover, etc.
 
-      // Check if this is a special key (action or disabled related)
-      const isSpecialKey = specialKeys.some((key) => colorName.startsWith(key));
+        // Check if this is a special key (action or disabled related)
+        const isSpecialKey = specialKeys.some((key) =>
+          colorName.startsWith(key),
+        );
 
-      if (isSpecialKey) {
-        // Initialize subgroup if it doesn't exist
-        if (!acc[subgroup]) {
-          acc[subgroup] = {};
-        }
-
-        // Add the color to the subgroup with the full color name
-        acc[subgroup][colorName] = value;
-      } else {
-        const predefinedKeys = [
-          "info",
-          "success",
-          "warning",
-          "error",
-          "primary",
-          "secondary",
-        ];
-
-        // Find the predefined key in the color name
-        let group = "other";
-        for (const predefinedKey of predefinedKeys) {
-          if (colorName.includes(predefinedKey)) {
-            group = predefinedKey;
-            break;
+        if (isSpecialKey) {
+          // Initialize subgroup if it doesn't exist
+          if (!acc[subgroup]) {
+            acc[subgroup] = {};
           }
+
+          // Add the color to the subgroup with the full color name
+          acc[subgroup][colorName] = value;
+        } else {
+          const predefinedKeys = [
+            "info",
+            "success",
+            "warning",
+            "error",
+            "primary",
+            "secondary",
+          ];
+
+          // Find the predefined key in the color name
+          let group = "other";
+          for (const predefinedKey of predefinedKeys) {
+            if (colorName.includes(predefinedKey)) {
+              group = predefinedKey;
+              break;
+            }
+          }
+
+          // If no predefined key found, use the subgroup as group
+          if (group === "other") {
+            group = subgroup;
+          }
+
+          // Create the final key by removing the group from color name
+          const finalKey =
+            colorName.replace(group, "").replace(/^_+|_+$/g, "") || subgroup;
+
+          // Initialize group if it doesn't exist
+          if (!acc[group]) {
+            acc[group] = {};
+          }
+
+          // Add the color to the group
+          acc[group][finalKey] = value;
         }
-
-        // If no predefined key found, use the subgroup as group
-        if (group === "other") {
-          group = subgroup;
-        }
-
-        // Create the final key by removing the group from color name
-        const finalKey =
-          colorName.replace(group, "").replace(/^_+|_+$/g, "") || subgroup;
-
-        // Initialize group if it doesn't exist
-        if (!acc[group]) {
-          acc[group] = {};
-        }
-
-        // Add the color to the group
-        acc[group][finalKey] = value;
       }
-    }
 
-    return acc;
-  }, {} as Record<string, Record<string, string>>);
+      return acc;
+    },
+    {} as Record<string, Record<string, string>>,
+  );
 }
 
 // This method takes the raw H/S/L values and produces an object that can be passed to `style`:

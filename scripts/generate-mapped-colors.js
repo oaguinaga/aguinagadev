@@ -33,7 +33,7 @@ function convertToSnakeCase(tokenPath) {
 function convertAliasToConstant(aliasValue) {
   if (!aliasValue.startsWith("alias:")) {
     console.warn(
-      `⚠️  Unexpected alias format: "${aliasValue}" (expected "alias:...")`
+      `⚠️  Unexpected alias format: "${aliasValue}" (expected "alias:...")`,
     );
     return `// INVALID: ${aliasValue}`;
   }
@@ -85,7 +85,7 @@ function createColorMaps(colorTokens) {
 
   for (const token of colorTokens) {
     lightColorMap[token.variableName] = convertAliasToConstant(
-      token.lightValue
+      token.lightValue,
     );
     darkColorMap[token.variableName] = convertAliasToConstant(token.darkValue);
   }
@@ -103,14 +103,14 @@ function generateTypeScriptContent(lightColorMap, darkColorMap) {
   const lightColorEntries = Object.entries(lightColorMap)
     .map(
       ([variableName, aliasReference]) =>
-        `  ${variableName}: ${aliasReference},`
+        `  ${variableName}: ${aliasReference},`,
     )
     .join("\n");
 
   const darkColorEntries = Object.entries(darkColorMap)
     .map(
       ([variableName, aliasReference]) =>
-        `  ${variableName}: ${aliasReference},`
+        `  ${variableName}: ${aliasReference},`,
     )
     .join("\n");
 
@@ -140,7 +140,7 @@ function main() {
     "assets",
     "tokens",
     "input",
-    "mapped-colors.json"
+    "mapped-colors.json",
   );
 
   const outputFilePath = path.join(
@@ -150,7 +150,7 @@ function main() {
     "assets",
     "tokens",
     "output",
-    "mapped-colors.ts"
+    "mapped-colors.ts",
   );
 
   try {
@@ -158,7 +158,7 @@ function main() {
     const designTokenData = JSON.parse(jsonFileContent);
 
     const mappedCollection = designTokenData.collections.find(
-      (collection) => collection.name === "mapped"
+      (collection) => collection.name === "mapped",
     );
 
     if (!mappedCollection) {
@@ -174,7 +174,7 @@ function main() {
 
     const typeScriptContent = generateTypeScriptContent(
       lightColorMap,
-      darkColorMap
+      darkColorMap,
     );
 
     const outputDirectory = path.dirname(outputFilePath);
@@ -186,7 +186,7 @@ function main() {
 
     console.log(`✅ Successfully generated ${outputFilePath}`);
     console.log(
-      `📊 Generated ${allColorTokens.length} color mappings for both light and dark themes`
+      `📊 Generated ${allColorTokens.length} color mappings for both light and dark themes`,
     );
   } catch (error) {
     console.error("❌ Error generating mapped colors:", error);
