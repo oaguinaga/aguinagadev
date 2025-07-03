@@ -1,14 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Search, AtSign, ChevronDown } from "react-feather";
 
-const icons = {
-  search: Search,
-  "at-sign": AtSign,
-  "chevron-down": ChevronDown,
-};
+import { icons } from "./icons";
 
-const Icon = ({
+function Icon({
   id,
   size,
   strokeWidth = 1,
@@ -18,7 +13,7 @@ const Icon = ({
   size: number;
   strokeWidth?: number;
   [key: string]: unknown;
-}) => {
+}) {
   const Component = icons[id];
 
   if (!Component) {
@@ -38,7 +33,7 @@ const Icon = ({
       <Component color="currentColor" size={size} />
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
   width: var(--size);

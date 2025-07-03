@@ -1,6 +1,6 @@
-import { ColorTuple } from "@/constants/colors";
+import type { ColorMapRaw } from "@/assets/tokens/output/mapped-colors";
 
-export const COLORS_BRAND: Record<string, ColorTuple> = {
+export const COLORS_BRAND: ColorMapRaw = {
   // grays
   brand_gray_50: [225, 40, 96],
   brand_gray_100: [224, 27, 92],

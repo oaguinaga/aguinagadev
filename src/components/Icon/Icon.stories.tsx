@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from "@storybook/nextjs";
 
-import Icon from './Icon';
+import Icon from "./index";
 
 const meta = {
   component: Icon,
@@ -13,6 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     id: "search",
-    size: 0
-  }
+    size: 0,
+  },
 };

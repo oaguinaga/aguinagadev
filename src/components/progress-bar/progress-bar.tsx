@@ -1,7 +1,9 @@
 import * as React from "react";
-import VisuallyHidden from "../VisuallyHidden";
 import styled from "styled-components";
-import { COLORS } from "@/constants/colorss-css";
+
+import { COLORS } from "@/constants/colors-css";
+
+import VisuallyHidden from "../visually-hidden";
 
 const STYLES = {
   sm: {
@@ -21,13 +23,13 @@ const STYLES = {
   },
 };
 
-const ProgressBar = ({
+function ProgressBar({
   value,
   size,
 }: {
   value: number;
   size: keyof typeof STYLES;
-}) => {
+}) {
   const style = STYLES[size as keyof typeof STYLES];
   if (!style) {
     throw new Error(`Unknown size: ${size}`);
@@ -46,7 +48,10 @@ const ProgressBar = ({
         } as React.CSSProperties
       }
     >
-      <VisuallyHidden>{value}%</VisuallyHidden>
+      <VisuallyHidden>
+        {value}
+        %
+      </VisuallyHidden>
       <BarWrapper>
         <Bar
           style={
@@ -59,7 +64,7 @@ const ProgressBar = ({
       </BarWrapper>
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
   background-color: ${COLORS.transparentGray15};

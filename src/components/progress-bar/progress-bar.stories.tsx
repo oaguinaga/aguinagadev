@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from "@storybook/nextjs";
-import ProgressBar from "./ProgressBar";
+import type { Meta, StoryObj } from "@storybook/nextjs";
+
+import ProgressBar from "./index";
 
 const meta = {
   component: ProgressBar,

@@ -1,8 +1,8 @@
-import React from "react";
 import Link from "next/link";
+import React from "react";
+import styled from "styled-components";
 
 import { BLOG_TITLE } from "@/constants/constants";
-import styled from "styled-components";
 
 function Logo({ mobileAlignment = "left" }) {
   return (
