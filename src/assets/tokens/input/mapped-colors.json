@@ -346,6 +346,13 @@
               "light": "alias:info/default",
               "dark": "alias:info/default"
             }
+          },
+          "focus": {
+            "type": "color",
+            "values": {
+              "light": "alias:primary/default",
+              "dark": "alias:primary/600"
+            }
           }
         }
       }

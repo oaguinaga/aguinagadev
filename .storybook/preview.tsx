@@ -1,8 +1,9 @@
 import type { Preview } from "@storybook/nextjs";
 import React from "react";
-import "./global.css";
 import { DARK_COLORS, LIGHT_COLORS } from "../src/constants/colors";
 import { applyThemeToRoot } from "../src/utils/theme";
+import "./global.css";
+import "../src/app/styles.css";
 
 // Add a global toolbar control for theme switching
 export const globalTypes = {

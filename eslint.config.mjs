@@ -44,6 +44,7 @@ export default antfu(
       "**/.output/**",
       "**/.cache/**",
       "**/.DS_Store",
+      "**/src/assets/tokens/output/**",
     ],
   },
   ...storybook.configs["flat/recommended"],
