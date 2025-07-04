@@ -52,8 +52,7 @@ function groupColors(colors: ColorMap) {
 
         // Add the color to the subgroup with the full color name
         acc[subgroup][colorName] = value;
-      }
-      else {
+      } else {
         const predefinedKeys = [
           "info",
           "success",

@@ -1,11 +1,11 @@
 "use client";
+import type { ColorTheme } from "@/constants/constants";
 import clsx from "clsx";
 import Cookie from "js-cookie";
 import * as React from "react";
 import { Moon, Sun } from "react-feather";
-import styled from "styled-components";
 
-import type { ColorTheme } from "@/constants/constants";
+import styled from "styled-components";
 
 import Logo from "@/components/logo";
 import { COLOR_THEME_COOKIE_NAME } from "@/constants/constants";

@@ -19,8 +19,9 @@ export default function StyledComponentsRegistry({
     return <>{styles}</>;
   });
 
-  if (typeof window !== "undefined")
+  if (typeof window !== "undefined") {
     return <>{children}</>;
+  }
 
   return (
     <StyleSheetManager

@@ -2,19 +2,49 @@
 // pnpm dlx @antfu/eslint-config@latest
 import antfu from "@antfu/eslint-config";
 import nextPlugin from "@next/eslint-plugin-next";
-import storybook from "eslint-plugin-storybook"
+import storybook from "eslint-plugin-storybook";
 
 export default antfu(
   {
-    type: "app",
-    typescript: true,
     react: true,
-    formatters: true,
+    typescript: true,
+
+    lessOpinionated: true,
+    isInEditor: false,
+
     stylistic: {
-      indent: 2,
       semi: true,
       quotes: "double",
+      indent: 2,
     },
+
+    formatters: {
+      css: true,
+    },
+
+    ignores: [
+      "migrations/**/*",
+      "next-env.d.ts",
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/coverage/**",
+      "**/out/**",
+      "**/public/**",
+      "**/artifacts/**",
+      "**/cache/**",
+      "**/typechain-types/**",
+      "**/.git/**",
+      "**/.vscode/**",
+      "**/.idea/**",
+      "**/.husky/**",
+      "**/.vercel/**",
+      "**/.turbo/**",
+      "**/.output/**",
+      "**/.cache/**",
+      "**/.DS_Store",
+    ],
   },
   ...storybook.configs["flat/recommended"],
   {
@@ -27,20 +57,19 @@ export default antfu(
     },
   },
   {
+    files: ["**/*.tsx"],
     rules: {
-      "ts/no-redeclare": "off",
-      "ts/consistent-type-definitions": ["error", "type"],
+      "ts/no-use-before-define": "off",
+    },
+  },
+  {
+    rules: {
+      "antfu/no-top-level-await": "off", // Allow top-level await
+      "style/brace-style": ["error", "1tbs"], // Use the default brace style
+      "ts/consistent-type-definitions": ["error", "type"], // Use `type` instead of `interface`
+      "react/prefer-destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
+      "node/prefer-global/process": "off", // Allow using `process.env`
       "no-console": ["warn"],
-      "antfu/no-top-level-await": ["off"],
-      "node/prefer-global/process": ["off"],
-      "node/no-process-env": ["error"],
-      "ts/no-use-before-define": ["off"],
-      "perfectionist/sort-imports": [
-        "error",
-        {
-          tsconfigRootDir: ".",
-        },
-      ],
       "unicorn/filename-case": [
         "error",
         {

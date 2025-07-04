@@ -3,10 +3,10 @@ import { Poppins, Space_Mono, Work_Sans } from "next/font/google";
 
 import Header from "@/components/header";
 
-import "./styles.css";
 import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
 import { BLOG_DESCRIPTION, BLOG_TITLE } from "@/constants/constants";
 import StyledComponentsRegistry from "@/lib/registry";
+import "./styles.css";
 
 const mainFont = Work_Sans({
   subsets: ["latin"],

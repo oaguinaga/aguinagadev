@@ -46,8 +46,7 @@ export function random(min: number, max: number, { rounded }: { rounded: boolean
 
   if (rounded) {
     return Math.floor(partialVal) + min;
-  }
-  else {
+  } else {
     return partialVal + min;
   }
 }
@@ -126,17 +125,13 @@ export function getTimeOfDay() {
 
   if (hourOfDay <= 4) {
     return "night";
-  }
-  else if (hourOfDay <= 11) {
+  } else if (hourOfDay <= 11) {
     return "morning";
-  }
-  else if (hourOfDay <= 17) {
+  } else if (hourOfDay <= 17) {
     return "afternoon";
-  }
-  else if (hourOfDay <= 21) {
+  } else if (hourOfDay <= 21) {
     return "evening";
-  }
-  else {
+  } else {
     return "night";
   }
 }
