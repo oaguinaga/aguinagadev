@@ -27,12 +27,13 @@ const meta = {
     disabled: {
       control: {
         type: "boolean",
+        defaultValue: false,
       },
     },
     variant: {
       control: {
         type: "select",
-        options: ["primary", "transparent", "outline"],
+        options: ["primary", "transparent", "outline", "success", "warning", "error"],
       },
     },
   },
