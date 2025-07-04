@@ -5,7 +5,7 @@ import Cookie from "js-cookie";
 import * as React from "react";
 import { Moon, Sun } from "react-feather";
 
-import styled from "styled-components"
+import styled from "styled-components";
 
 import Logo from "@/components/logo";
 import { COLOR_THEME_COOKIE_NAME } from "@/constants/constants";
