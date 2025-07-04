@@ -7,7 +7,6 @@ type StyleConfig = {
   background: string;
   color: string;
   background_hover: string;
-  border?: string;
 };
 
 function Button({
@@ -37,7 +36,6 @@ function Button({
       background: "var(--color-transparent)",
       color: "var(--color-text-action)",
       background_hover: "var(--color-surface-action-hover-light)",
-      border: "var(--color-border-action)",
     },
   } as const;
 
@@ -50,7 +48,6 @@ function Button({
           "--background": STYLES[variant].background,
           "--color": STYLES[variant].color,
           "--background-hover": STYLES[variant].background_hover,
-          "--border": STYLES[variant].border,
         } as React.CSSProperties
       }
     >
@@ -64,9 +61,9 @@ function Button({
 const Wrapper = styled.button`
   background: var(--background);
   color: var(--color);
-  padding: 12px 24px;
+  padding: 8px 20px;
   border-radius: 4px;
-  border: none;
+  border: 2px solid var(--background);
   cursor: pointer;
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-semibold);
@@ -74,10 +71,10 @@ const Wrapper = styled.button`
   display: flex;
   gap: 12px;
   letter-spacing: 0.04em;
-  transition: all 0.2s ease-in-out;
 
   &:hover {
     background: var(--background-hover);
+    border: 2px solid var(--background-hover);
   }
 
   &:disabled {
@@ -90,23 +87,16 @@ const Wrapper = styled.button`
     }
   }
 
-  /* this is for all other variants */
   &:focus-visible {
     outline: 2px solid var(--color-border-focus);
-    outline-offset: 2px;
+    outline-offset: 1px;
   }
 
   /* this is for the outline variant */
   &[data-variant="outline"] {
-    outline: 2px solid var(--color-border-action);
+    border: 2px solid var(--color-border-action);
   }
 
-  &[data-variant="outline"]:focus-visible {
-    /* Box shadow to create a 1px border to the inside of the button */
-    box-shadow:
-      0 0 0 1px transparent,
-      inset 0 0 0 1px var(--color-border-focus);
-  }
 `;
 
 export default Button;
