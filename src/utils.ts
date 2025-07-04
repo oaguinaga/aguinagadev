@@ -1,8 +1,7 @@
 type PlainObject = Record<string, unknown>;
 
-/* eslint-disable */
-export const range = (start: number, end?: number, step: number = 1) => {
-  let output = [];
+export function range(start: number, end?: number, step: number = 1) {
+  const output: number[] = [];
   if (typeof end === "undefined") {
     end = start;
     start = 0;
@@ -11,13 +10,10 @@ export const range = (start: number, end?: number, step: number = 1) => {
     output.push(i);
   }
   return output;
-};
+}
 
 // This method is like `transformValues`, except we can change both the value *and* keys.
-export const transformObject = (
-  obj: PlainObject,
-  callback: (key: string, value: unknown) => [string, unknown]
-) => {
+export function transformObject(obj: PlainObject, callback: (key: string, value: unknown) => [string, unknown]) {
   if (typeof obj !== "object") {
     return obj;
   }
@@ -29,7 +25,7 @@ export const transformObject = (
       [newKey]: newValue,
     };
   }, {});
-};
+}
 
 export function sampleOne<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -45,11 +41,7 @@ export function sample<T>(arr: Array<T>, len = 1): Array<T> {
   return output;
 }
 
-export const random = (
-  min: number,
-  max: number,
-  { rounded }: { rounded: boolean } = { rounded: true }
-) => {
+export function random(min: number, max: number, { rounded }: { rounded: boolean } = { rounded: true }) {
   const partialVal = Math.random() * (max - min);
 
   if (rounded) {
@@ -57,14 +49,15 @@ export const random = (
   } else {
     return partialVal + min;
   }
-};
+}
 
-export const sum = (values: Array<number>) =>
-  values.reduce((sum, value) => sum + value, 0);
+export function sum(values: Array<number>) {
+  return values.reduce((sum, value) => sum + value, 0);
+}
 
 export const mean = (values: Array<number>) => sum(values) / values.length;
 
-export const clamp = (value: number, min = 0, max = 1) => {
+export function clamp(value: number, min = 0, max = 1) {
   // We might be passing in "inverted" values, eg:
   //    clamp(someVal, 10, 5);
   //
@@ -74,53 +67,59 @@ export const clamp = (value: number, min = 0, max = 1) => {
   const actualMax = Math.max(min, max);
 
   return Math.max(actualMin, Math.min(actualMax, value));
-};
+}
 
-export const roundTo = (value: number, places = 0) =>
-  Math.round(value * 10 ** places) / 10 ** places;
+export function roundTo(value: number, places = 0) {
+  return Math.round(value * 10 ** places) / 10 ** places;
+}
 
-export const roundToNearest = (value: number, step: number) =>
-  Math.round(value / step) * step;
+export function roundToNearest(value: number, step: number) {
+  return Math.round(value / step) * step;
+}
 
-export const slugify = (str = "") => {
+export function slugify(str = "") {
   let slug = str
     .toLowerCase()
     .replace(/\s/g, "-")
-    .replace(/[^a-zA-Z0-9-]/g, "");
+    .replace(/[^a-z0-9-]/gi, "");
 
   // Replace all numbers with their word counterpart
   slug = replaceDigits(slug);
 
   return slug;
-};
+}
 export const isEmpty = (obj: object) => Object.keys(obj).length === 0;
 
-export const camelToDashCase = (val: string) =>
-  val.replace(/[A-Z0-9]/g, (letter: string) => `-${letter.toLowerCase()}`);
+export function camelToDashCase(val: string) {
+  return val.replace(/[A-Z0-9]/g, (letter: string) => `-${letter.toLowerCase()}`);
+}
 
-export const dashToCamelCase = (val: string) => {
+export function dashToCamelCase(val: string) {
   return val.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-};
+}
 
-export const capitalize = (value: string) =>
-  value[0].toUpperCase() + value.slice(1);
+export function capitalize(value: string) {
+  return value[0].toUpperCase() + value.slice(1);
+}
 
-export const capitalizeSentence = (value: string) => {
+export function capitalizeSentence(value: string) {
   return value
     .split(" ")
     .map((word) => {
       return word[0].toUpperCase() + word.slice(1);
     })
     .join(" ");
-};
+}
 
-export const hyphenate = (value: string) =>
-  value.replace(/([A-Z])/g, "-$1").toLowerCase();
+export function hyphenate(value: string) {
+  return value.replace(/([A-Z])/g, "-$1").toLowerCase();
+}
 
-export const delay = (duration: number) =>
-  new Promise((resolve) => setTimeout(resolve, duration));
+export function delay(duration: number) {
+  return new Promise(resolve => setTimeout(resolve, duration));
+}
 
-export const getTimeOfDay = () => {
+export function getTimeOfDay() {
   const now = new Date();
   const hourOfDay = now.getHours();
 
@@ -135,18 +134,18 @@ export const getTimeOfDay = () => {
   } else {
     return "night";
   }
-};
+}
 
 /**
  * input:  "js,cat cat,  bee, dog"
  * output: ['js', 'cat cat', 'bee', 'dog']
  */
-export const splitCommaSeparatedArray = (value: string) => {
+export function splitCommaSeparatedArray(value: string) {
   return value.replace(/,\s+/g, ",").split(",");
-};
+}
 
 // In a string, turn digits (1) into spelled words (one)
-export const replaceDigits = (value: string) => {
+export function replaceDigits(value: string) {
   return value
     .replace(/1/g, "one")
     .replace(/2/g, "two")
@@ -158,4 +157,4 @@ export const replaceDigits = (value: string) => {
     .replace(/8/g, "eight")
     .replace(/9/g, "nine")
     .replace(/0/g, "zero");
-};
+}

@@ -1,16 +1,19 @@
-import {
-  LIGHT_COLORS_MAP,
-  DARK_COLORS_MAP as IMPORTED_DARK_COLORS_MAP,
+import type {
+  ColorMapRaw,
+  ColorTuple,
 } from "@/assets/tokens/output/mapped-colors";
 
+import {
+  DARK_COLORS_MAP as IMPORTED_DARK_COLORS_MAP,
+  LIGHT_COLORS_MAP,
+} from "@/assets/tokens/output/mapped-colors";
 import { transformObject } from "@/utils";
-import { ColorMapRaw, ColorTuple } from "@/assets/tokens/output/mapped-colors";
 
 const kebab = (str: string) => str.replace(/_/g, "-");
 
-export interface ColorMap {
+export type ColorMap = {
   [key: `--${string}`]: string;
-}
+};
 
 // Create local copies that we can modify
 const LIGHT_COLORS_RAW: ColorMapRaw = { ...LIGHT_COLORS_MAP };
@@ -39,7 +42,7 @@ function groupColors(colors: ColorMap) {
       const colorName = parts.slice(2).join("_"); // action, action_hover, etc.
 
       // Check if this is a special key (action or disabled related)
-      const isSpecialKey = specialKeys.some((key) => colorName.startsWith(key));
+      const isSpecialKey = specialKeys.some(key => colorName.startsWith(key));
 
       if (isSpecialKey) {
         // Initialize subgroup if it doesn't exist
@@ -74,8 +77,8 @@ function groupColors(colors: ColorMap) {
         }
 
         // Create the final key by removing the group from color name
-        const finalKey =
-          colorName.replace(group, "").replace(/^_+|_+$/g, "") || subgroup;
+        const finalKey
+          = colorName.replace(group, "").replace(/^_+|_+$/g, "") || subgroup;
 
         // Initialize group if it doesn't exist
         if (!acc[group]) {
@@ -104,8 +107,8 @@ function createStyleObject(colors: ColorMapRaw): ColorMap {
     const [h, s, l, a = 1] = value as ColorTuple;
 
     const newKey = `--${kebab(key)}`;
-    const newValue =
-      a === 1 ? `hsl(${h}deg ${s}% ${l}%)` : `hsl(${h}deg ${s}% ${l}% / ${a})`;
+    const newValue
+      = a === 1 ? `hsl(${h}deg ${s}% ${l}%)` : `hsl(${h}deg ${s}% ${l}% / ${a})`;
 
     return [newKey, newValue];
   });

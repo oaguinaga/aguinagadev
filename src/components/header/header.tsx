@@ -1,13 +1,17 @@
 "use client";
+import type { ColorTheme } from "@/constants/constants";
 import clsx from "clsx";
-import * as React from "react";
-import VisuallyHidden from "../VisuallyHidden";
-import styled from "styled-components";
-import { COLOR_THEME_COOKIE_NAME, ColorTheme } from "@/constants/constants";
-import { applyThemeToRoot } from "@/utils/theme";
 import Cookie from "js-cookie";
+import * as React from "react";
 import { Moon, Sun } from "react-feather";
-import Logo from "@/components/Logo";
+
+import styled from "styled-components";
+
+import Logo from "@/components/logo";
+import { COLOR_THEME_COOKIE_NAME } from "@/constants/constants";
+import { applyThemeToRoot } from "@/utils/theme";
+
+import VisuallyHidden from "../visually-hidden";
 
 function Header({
   initialTheme,

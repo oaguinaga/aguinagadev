@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const VisuallyHidden = ({
+function VisuallyHidden({
   children,
   ...delegated
-}: React.PropsWithChildren) => {
+}: React.PropsWithChildren) {
   return <Wrapper {...delegated}>{children}</Wrapper>;
-};
+}
 
 const Wrapper = styled.span`
   position: absolute;

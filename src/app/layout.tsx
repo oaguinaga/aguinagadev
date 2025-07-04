@@ -1,11 +1,12 @@
-import { Work_Sans, Poppins, Space_Mono } from "next/font/google";
 import clsx from "clsx";
-import StyledComponentsRegistry from "@/lib/registry";
+import { Poppins, Space_Mono, Work_Sans } from "next/font/google";
 
-import "./styles.css";
-import { BLOG_TITLE, BLOG_DESCRIPTION } from "@/constants/constants";
+import Header from "@/components/header";
+
 import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
-import Header from "@/components/Header";
+import { BLOG_DESCRIPTION, BLOG_TITLE } from "@/constants/constants";
+import StyledComponentsRegistry from "@/lib/registry";
+import "./styles.css";
 
 const mainFont = Work_Sans({
   subsets: ["latin"],
@@ -52,7 +53,7 @@ export default function RootLayout({
       className={clsx(
         mainFont.variable,
         headingFont.variable,
-        monoFont.variable
+        monoFont.variable,
       )}
       data-color-theme={theme}
     >

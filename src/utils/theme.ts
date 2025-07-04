@@ -1,5 +1,6 @@
+import type { ColorTheme } from "@/constants/constants";
+
 import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
-import { ColorTheme } from "@/constants/constants";
 
 /**
  * Applies theme color variables to the document root element

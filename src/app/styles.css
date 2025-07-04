@@ -48,9 +48,7 @@ html {
   --outer-content-width: 80rem;
   --viewport-padding: 1rem;
   --header-height: 5rem;
-  --trimmed-content-width: calc(
-    var(--content-width) - var(--viewport-padding) * 2
-  );
+  --trimmed-content-width: calc(var(--content-width) - var(--viewport-padding) * 2);
 
   /* Font sizes */
   --font-size-body-xs: 0.5rem;
@@ -139,11 +137,7 @@ body::before {
   left: 0;
   right: 0;
   height: 50vh;
-  background: linear-gradient(
-    to top,
-    var(--color-backdrop),
-    var(--color-backdrop-highlight)
-  );
+  background: linear-gradient(to top, var(--color-backdrop), var(--color-backdrop-highlight));
 }
 
 body > main {
