@@ -51,6 +51,7 @@ export const LIGHT_COLORS_MAP: ColorMapRaw = {
   color_border_warning_hover: COLORS_ALIAS.warning_700,
   color_border_error_hover: COLORS_ALIAS.error_800,
   color_border_info_hover: COLORS_ALIAS.info_default,
+  color_border_focus: COLORS_ALIAS.primary_default,
 };
 
 export const DARK_COLORS_MAP: ColorMapRaw = {
@@ -102,4 +103,5 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   color_border_warning_hover: COLORS_ALIAS.warning_600,
   color_border_error_hover: COLORS_ALIAS.error_default,
   color_border_info_hover: COLORS_ALIAS.info_default,
+  color_border_focus: COLORS_ALIAS.primary_600,
 };

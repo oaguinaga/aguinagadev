@@ -1,17 +1,40 @@
 import React from "react";
 import styled from "styled-components";
 
-import { icons } from "./icons";
+/**
+ * ⚠️ importing the icons like this is ok for less than 50 icons. However
+ * it might make sense to dynamically import the icons if we have more
+ * than 50 icons in the future.
+ * example:
+ *
+ * const iconMap = {
+ *   search: () => import("lucide-react").then(m => m.Search),
+ *    ... more icons
+ * };
+ * const [Component, setComponent] = useState(null);
+ * useEffect(() => {
+ *   iconMap[id]().then(setComponent);
+ * }, [id]);
+ * return Component ? <Component /> : null;
+ *
+ * this ensures that the icon is only imported when it is needed,
+ * and not when the component is imported.
+ */
+import { icons } from "./icon-list";
+
+export type IconId = keyof typeof icons;
 
 function Icon({
   id,
-  size,
-  strokeWidth = 1,
+  size = 24,
+  strokeWidth = 2,
+  style,
   ...delegated
 }: {
   id: keyof typeof icons;
-  size: number;
+  size?: number;
   strokeWidth?: number;
+  style?: React.CSSProperties;
   [key: string]: unknown;
 }) {
   const Component = icons[id];
@@ -26,6 +49,7 @@ function Icon({
         {
           "--size": `${size}px`,
           "--stroke-width": `${strokeWidth}px`,
+          ...style,
         } as React.CSSProperties
       }
       {...delegated}
