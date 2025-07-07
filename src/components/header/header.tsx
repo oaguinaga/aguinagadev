@@ -61,7 +61,6 @@ const Wrapper = styled.header`
 `;
 
 const Action = styled.button`
-  display: block;
   border: none;
   background: transparent;
   width: 3rem;

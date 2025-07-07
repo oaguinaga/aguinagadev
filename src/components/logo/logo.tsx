@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   font-weight: 600;
   letter-spacing: -0.5px;
 
-  @media (min-width: 35rem) {
+  @media (width >= 35rem) {
     font-size: 1.5rem;
   }
 `;

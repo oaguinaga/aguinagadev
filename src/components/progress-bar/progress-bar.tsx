@@ -68,7 +68,8 @@ function ProgressBar({
 
 const Wrapper = styled.div`
   background-color: ${COLORS.transparentGray15};
-  box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
+  box-shadow: inset 0 2px 4px ${COLORS.transparentGray35};
+
   /* trim off corners when bar is closer to 100% */
   padding: var(--padding);
   border-radius: var(--border-radius);
