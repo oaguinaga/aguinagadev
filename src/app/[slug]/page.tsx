@@ -1,6 +1,7 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import BlogHero from "@/components/blog-hero/blog-hero";
 import { loadBlogPost } from "@/helpers/file-helpers";
+import { MDX_COMPONENT_MAP } from "@/helpers/mdx-components";
 import styles from "./slug.module.css";
 
 async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
@@ -17,7 +18,10 @@ async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
         category={post.frontmatter.category}
       />
       <div className={styles.page}>
-        <MDXRemote source={post.content} />
+        <MDXRemote
+          source={post.content}
+          components={MDX_COMPONENT_MAP}
+        />
       </div>
     </article>
   );
