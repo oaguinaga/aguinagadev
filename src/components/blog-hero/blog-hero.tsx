@@ -1,3 +1,5 @@
+"use client";
+
 import { format } from "date-fns";
 import * as React from "react";
 import styled from "styled-components";
@@ -25,24 +27,31 @@ function BlogHero({
       <MetaData>
         <DataList>
           {category && (
-            <>
-              <DataListTerm>Filed under</DataListTerm>
-              <DataListDefinition>{category}</DataListDefinition>
-            </>
+            <DataListItemWrapper>
+              <dt>Filed under</dt>
+              <dd>{category}</dd>
+            </DataListItemWrapper>
           )}
-          <DataListTerm>Published on</DataListTerm>
-          <DataListDefinition>
-            <time dateTime={publishedOn}>
-              {humanReadableDatePublished}
-            </time>
-          </DataListDefinition>
+          <DataListItemWrapper>
+            <dt> on</dt>
+            <dd>
+              <time dateTime={publishedOn}>
+                {humanReadableDatePublished}
+              </time>
+            </dd>
+          </DataListItemWrapper>
         </DataList>
         {updatedOn && (
+
           <DataList>
-            <DataListTerm>Updated on</DataListTerm>
-            <DataListDefinition>
-              <time dateTime={updatedOn}>{humanReadableDateUpdated}</time>
-            </DataListDefinition>
+            <DataListItemWrapper>
+              <dt>Last updated on</dt>
+              <dd>
+                <time dateTime={updatedOn}>
+                  {humanReadableDateUpdated}
+                </time>
+              </dd>
+            </DataListItemWrapper>
           </DataList>
         )}
       </MetaData>
@@ -54,29 +63,47 @@ const Wrapper = styled.header`
   font-family: var(--font-family-heading);
   display: flex;  
   flex-direction: column;
-  gap: 1rem;
+  gap: 8px;
   align-items: center;
-  `;
+  justify-content: center;
+  text-align: center;
+`;
 
 const MetaData = styled.div`
-align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 `;
+
+const DataListItemWrapper = styled.div`
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  `;
 
 const DataList = styled.dl`
   display: flex;
   gap: 0.25rem;
-`;
+  justify-content: center;
+  flex-direction: column;
 
-const DataListTerm = styled.dt`
-  font-style: italic;
-  color: var(--color-text-muted);
-`;
+  div {
+    display: flex;
+  }
 
-const DataListDefinition = styled.dd`
-  font-weight: var(--font-weight-semibold);
+  @media (min-width: 600px) {
+    flex-direction: row;
+
+  }
+
+  dt {
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    font-weight: var(--font-weight-semibold);
+  }
 `;
 
 export default BlogHero;

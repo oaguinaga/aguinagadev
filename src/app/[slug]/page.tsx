@@ -1,4 +1,5 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
+import BlogHero from "@/components/blog-hero/blog-hero";
 import { loadBlogPost } from "@/helpers/file-helpers";
 import styles from "./slug.module.css";
 
@@ -9,8 +10,12 @@ async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
 
   return (
     <article className={styles.wrapper}>
-      <h1>{post.frontmatter.title}</h1>
-      <p>{post.frontmatter.abstract}</p>
+      <BlogHero
+        title={post.frontmatter.title}
+        publishedOn={post.frontmatter.publishedOn}
+        updatedOn={post.frontmatter.updatedOn}
+        category={post.frontmatter.category}
+      />
       <div className={styles.page}>
         <MDXRemote source={post.content} />
       </div>

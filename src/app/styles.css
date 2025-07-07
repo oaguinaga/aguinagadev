@@ -85,6 +85,9 @@ html {
   --line-height-h1: 4.5rem;
   --line-height-h2: 3.5rem;
   --line-height-h3: 3rem;
+  --line-height-h1-mobile: 2.5rem;
+  --line-height-h2-mobile: 2rem;
+  --line-height-h3-mobile: 1.75rem;
   --line-height-h4: 2.5rem;
   --line-height-h5: 1.75rem;
   --line-height-h6: 1.5rem;
@@ -174,20 +177,20 @@ h6 {
 }
 
 h1 {
-  font-size: var(--font-size-h1);
-  line-height: var(--line-height-h1);
+  font-size: var(--font-size-h1-mobile);
+  line-height: var(--line-height-h1-mobile);
   font-weight: 650;
 }
 h2 {
-  font-size: var(--font-size-h2);
-  line-height: var(--line-height-h2);
+  font-size: var(--font-size-h2-mobile);
+  line-height: var(--line-height-h2-mobile);
   margin-top: 2em;
   margin-bottom: 0.5em;
   font-weight: 600;
 }
 h3 {
-  font-size: var(--font-size-h3);
-  line-height: var(--line-height-h3);
+  font-size: var(--font-size-h3-mobile);
+  line-height: var(--line-height-h3-mobile);
   margin-top: 2em;
   margin-bottom: 0.5em;
   font-weight: 500;
@@ -220,16 +223,19 @@ button {
   padding: 0;
 }
 
-@media (min-width: 35rem) {
+@media (min-width: 600px) {
   h1 {
-    font-size: var(--font-size-h1-mobile);
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
   }
 
   h2 {
-    font-size: var(--font-size-h2-mobile);
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
   }
   h3 {
-    font-size: var(--font-size-h3-mobile);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
   }
 }
 
