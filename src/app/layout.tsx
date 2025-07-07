@@ -1,10 +1,12 @@
+import type { ColorTheme } from "@/constants/constants";
 import clsx from "clsx";
+
 import { Poppins, Space_Mono, Work_Sans } from "next/font/google";
 
+import { cookies } from "next/headers";
 import Header from "@/components/header";
-
 import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
-import { BLOG_DESCRIPTION, BLOG_TITLE } from "@/constants/constants";
+import { BLOG_DESCRIPTION, BLOG_TITLE, COLOR_THEME_COOKIE_NAME, DEFAULT_COLOR_THEME } from "@/constants/constants";
 import StyledComponentsRegistry from "@/lib/registry";
 import "./styles.css";
 
@@ -37,12 +39,13 @@ export const metadata = {
   description: BLOG_DESCRIPTION,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = "dark";
+  const savedTheme = (await cookies()).get(COLOR_THEME_COOKIE_NAME);
+  const theme = (savedTheme?.value || DEFAULT_COLOR_THEME) as ColorTheme;
 
   return (
     <html

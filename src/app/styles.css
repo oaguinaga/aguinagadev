@@ -58,6 +58,18 @@ html {
   --trimmed-content-width: calc(var(--content-width) - var(--viewport-padding) * 2);
   --color-transparent: transparent;
 
+  /* Mobile first */
+  /*
+  @media (min-width: 640px)  sm: tablets in portrait
+  @media (min-width: 768px)  md: tablets in landscape, small laptops
+  @media (min-width: 1024px)  lg: desktops
+  @media (min-width: 1280px)  xl: large desktops
+  */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
   /* Font sizes */
   --font-size-body-xs: 0.5rem;
   --font-size-body-sm: 0.75rem;
@@ -85,6 +97,9 @@ html {
   --line-height-h1: 4.5rem;
   --line-height-h2: 3.5rem;
   --line-height-h3: 3rem;
+  --line-height-h1-mobile: 2.5rem;
+  --line-height-h2-mobile: 2rem;
+  --line-height-h3-mobile: 1.75rem;
   --line-height-h4: 2.5rem;
   --line-height-h5: 1.75rem;
   --line-height-h6: 1.5rem;
@@ -163,21 +178,31 @@ em {
 code {
   font-family: var(--font-family-mono);
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+}
+
 h1 {
-  font-size: var(--font-size-h1);
-  line-height: var(--line-height-h1);
+  font-size: var(--font-size-h1-mobile);
+  line-height: var(--line-height-h1-mobile);
   font-weight: 650;
 }
 h2 {
-  font-size: var(--font-size-h2);
-  line-height: var(--line-height-h2);
+  font-size: var(--font-size-h2-mobile);
+  line-height: var(--line-height-h2-mobile);
   margin-top: 2em;
   margin-bottom: 0.5em;
   font-weight: 600;
 }
 h3 {
-  font-size: var(--font-size-h3);
-  line-height: var(--line-height-h3);
+  font-size: var(--font-size-h3-mobile);
+  line-height: var(--line-height-h3-mobile);
   margin-top: 2em;
   margin-bottom: 0.5em;
   font-weight: 500;
@@ -210,16 +235,19 @@ button {
   padding: 0;
 }
 
-@media (min-width: 35rem) {
+@media (min-width: 600px) {
   h1 {
-    font-size: var(--font-size-h1-mobile);
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
   }
 
   h2 {
-    font-size: var(--font-size-h2-mobile);
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
   }
   h3 {
-    font-size: var(--font-size-h3-mobile);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
   }
 }
 
