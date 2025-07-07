@@ -58,6 +58,18 @@ html {
   --trimmed-content-width: calc(var(--content-width) - var(--viewport-padding) * 2);
   --color-transparent: transparent;
 
+  /* Mobile first */
+  /*
+  @media (min-width: 640px)  sm: tablets in portrait
+  @media (min-width: 768px)  md: tablets in landscape, small laptops
+  @media (min-width: 1024px)  lg: desktops
+  @media (min-width: 1280px)  xl: large desktops
+  */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
   /* Font sizes */
   --font-size-body-xs: 0.5rem;
   --font-size-body-sm: 0.75rem;

@@ -1,13 +1,17 @@
+import type { CategoryKey } from "@/constants/constants";
 import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 import React from "react";
 
-type BlogPost = {
+export type BlogPost = {
   slug: string;
-  publishedOn?: string;
   title: string;
+  subtitle?: string;
   abstract: string;
+  category: CategoryKey;
+  updatedOn?: string;
+  publishedOn?: string;
 };
 
 export async function getBlogPostList(): Promise<BlogPost[]> {

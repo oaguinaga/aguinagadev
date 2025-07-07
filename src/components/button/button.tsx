@@ -1,3 +1,5 @@
+"use client";
+
 import type { IconId } from "@/components/icon/index";
 import * as React from "react";
 import styled from "styled-components";

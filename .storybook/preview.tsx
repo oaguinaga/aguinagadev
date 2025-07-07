@@ -26,6 +26,7 @@ const withTheme = (Story, context) => {
 
 const preview: Preview = {
   parameters: {
+    layout: "centered",
     docs: {
       toc: true, // 👈 Enables the table of contents
     },

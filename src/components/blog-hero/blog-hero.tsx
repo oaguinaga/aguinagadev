@@ -91,7 +91,7 @@ const DataList = styled.dl`
     display: flex;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 768px) {
     flex-direction: row;
 
   }

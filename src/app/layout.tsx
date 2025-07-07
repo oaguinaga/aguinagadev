@@ -1,8 +1,9 @@
+import type { ColorTheme } from "@/constants/constants";
 import clsx from "clsx";
+
 import { Poppins, Space_Mono, Work_Sans } from "next/font/google";
 
 import { cookies } from "next/headers";
-
 import Header from "@/components/header";
 import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
 import { BLOG_DESCRIPTION, BLOG_TITLE, COLOR_THEME_COOKIE_NAME, DEFAULT_COLOR_THEME } from "@/constants/constants";
@@ -44,7 +45,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const savedTheme = (await cookies()).get(COLOR_THEME_COOKIE_NAME);
-  const theme = savedTheme?.value || DEFAULT_COLOR_THEME;
+  const theme = (savedTheme?.value || DEFAULT_COLOR_THEME) as ColorTheme;
 
   return (
     <html

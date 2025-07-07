@@ -4,3 +4,14 @@ export const BLOG_DESCRIPTION = "This is a blog about my experiences and thought
 
 export type ColorTheme = "light" | "dark";
 export const COLOR_THEME_COOKIE_NAME = "color-theme";
+
+export const CATEGORIES = {
+  JAVASCRIPT: "JavaScript",
+  REACT: "React",
+  ANIMATION: "Animation",
+  SHOPIFY: "Shopify",
+  CSS: "CSS",
+  GENERAL: "General",
+} as const;
+export type CategoryKey = keyof typeof CATEGORIES;
+export type Category = (typeof CATEGORIES)[keyof typeof CATEGORIES];

@@ -2,7 +2,10 @@
   "collections": [
     {
       "name": "mapped",
-      "modes": ["light", "dark"],
+      "modes": [
+        "light",
+        "dark"
+      ],
       "variables": {
         "text": {
           "headings": {
@@ -101,8 +104,8 @@
           "primary": {
             "type": "color",
             "values": {
-              "light": "alias:neutrals/white",
-              "dark": "alias:neutrals/900"
+              "light": "alias:neutrals/50",
+              "dark": "alias:neutrals/1000"
             }
           },
           "info": {
