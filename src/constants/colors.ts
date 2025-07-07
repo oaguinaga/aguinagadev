@@ -21,6 +21,10 @@ const DARK_COLORS_MAP: ColorMapRaw = { ...IMPORTED_DARK_COLORS_MAP };
 DARK_COLORS_MAP.color_page_background = DARK_COLORS_MAP.color_surface_page;
 LIGHT_COLORS_RAW.color_page_background = LIGHT_COLORS_RAW.color_surface_page;
 
+// I need to override the code block background color to always be the same as the page background dark mode
+LIGHT_COLORS_RAW.color_surface_code = DARK_COLORS_MAP.color_surface_page;
+DARK_COLORS_MAP.color_surface_code = DARK_COLORS_MAP.color_surface_page;
+
 export const LIGHT_COLORS = createStyleObject(LIGHT_COLORS_RAW);
 export const DARK_COLORS = createStyleObject(DARK_COLORS_MAP);
 

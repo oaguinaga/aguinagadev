@@ -13,6 +13,26 @@ To understand closures, we first need to understand scope. In JavaScript, each f
 
 But what if we want to interact with these variables from the outside world? Enter closures.
 
+and some cases
+
+```css
+.parent {
+  display: grid;
+  gap: 1rem;
+}
+@supports not (gap: 1rem) {
+  /*
+    Any CSS in here will be applied only if the “gap”
+    property is unsupported.
+  */
+  .child {
+    margin-inline: 0.5rem;
+  }
+}
+
+```
+
+
 A closure gives you access to an outer function’s scope from an inner function. It's like a bridge connecting our secluded island with the outside world. To create a closure, we simply define a function inside another function and expose the inner function, either by returning it or passing it to another function.
 
 Here's a simple closure in action:
