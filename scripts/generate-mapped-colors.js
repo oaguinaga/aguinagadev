@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,11 +10,11 @@ const __dirname = path.dirname(__filename);
  */
 function isColorToken(tokenObject) {
   return (
-    tokenObject &&
-    tokenObject.type === "color" &&
-    tokenObject.values &&
-    tokenObject.values.light &&
-    tokenObject.values.dark
+    tokenObject
+    && tokenObject.type === "color"
+    && tokenObject.values
+    && tokenObject.values.light
+    && tokenObject.values.dark
   );
 }
 
@@ -27,20 +27,28 @@ function convertToSnakeCase(tokenPath) {
 }
 
 /**
- * Converts an alias reference to a TypeScript constant reference
+ * Converts a value to appropriate TypeScript format
  * Example: "alias:primary/default" becomes "COLORS_ALIAS.primary_default"
+ * Example: [216, 16, 6] becomes "[216, 16, 6]"
  */
-function convertAliasToConstant(aliasValue) {
-  if (!aliasValue.startsWith("alias:")) {
-    console.warn(
-      `⚠️  Unexpected alias format: "${aliasValue}" (expected "alias:...")`
-    );
-    return `// INVALID: ${aliasValue}`;
+function convertValue(value) {
+  // Handle hardcoded arrays
+  if (Array.isArray(value)) {
+    return `[${value.join(", ")}]`;
   }
 
-  const aliasPath = aliasValue.replace("alias:", "");
-  const constantName = aliasPath.replace("/", "_");
-  return `COLORS_ALIAS.${constantName}`;
+  // Handle alias references
+  if (typeof value === "string" && value.startsWith("alias:")) {
+    const aliasPath = value.replace("alias:", "");
+    const constantName = aliasPath.replace("/", "_");
+    return `COLORS_ALIAS.${constantName}`;
+  }
+
+  // Handle unexpected formats
+  console.warn(
+    `⚠️  Unexpected value format: "${value}" (expected "alias:..." or array)`,
+  );
+  return `// INVALID: ${value}`;
 }
 
 /**
@@ -84,10 +92,10 @@ function createColorMaps(colorTokens) {
   const darkColorMap = {};
 
   for (const token of colorTokens) {
-    lightColorMap[token.variableName] = convertAliasToConstant(
-      token.lightValue
+    lightColorMap[token.variableName] = convertValue(
+      token.lightValue,
     );
-    darkColorMap[token.variableName] = convertAliasToConstant(token.darkValue);
+    darkColorMap[token.variableName] = convertValue(token.darkValue);
   }
 
   return {
@@ -102,15 +110,15 @@ function createColorMaps(colorTokens) {
 function generateTypeScriptContent(lightColorMap, darkColorMap) {
   const lightColorEntries = Object.entries(lightColorMap)
     .map(
-      ([variableName, aliasReference]) =>
-        `  ${variableName}: ${aliasReference},`
+      ([variableName, colorValue]) =>
+        `  ${variableName}: ${colorValue},`,
     )
     .join("\n");
 
   const darkColorEntries = Object.entries(darkColorMap)
     .map(
-      ([variableName, aliasReference]) =>
-        `  ${variableName}: ${aliasReference},`
+      ([variableName, colorValue]) =>
+        `  ${variableName}: ${colorValue},`,
     )
     .join("\n");
 
@@ -140,7 +148,7 @@ function main() {
     "assets",
     "tokens",
     "input",
-    "mapped-colors.json"
+    "mapped-colors.json",
   );
 
   const outputFilePath = path.join(
@@ -150,7 +158,7 @@ function main() {
     "assets",
     "tokens",
     "output",
-    "mapped-colors.ts"
+    "mapped-colors.ts",
   );
 
   try {
@@ -158,23 +166,23 @@ function main() {
     const designTokenData = JSON.parse(jsonFileContent);
 
     const mappedCollection = designTokenData.collections.find(
-      (collection) => collection.name === "mapped"
+      collection => collection.name === "mapped",
     );
 
     if (!mappedCollection) {
-      throw new Error('Could not find "mapped" collection in the input file');
+      throw new Error("Could not find \"mapped\" collection in the input file");
     }
 
     console.log("🎨 Extracting color tokens...");
     const allColorTokens = findAllColorTokens(mappedCollection.variables);
 
     console.log("🗺️  Creating color maps...");
-    const { light: lightColorMap, dark: darkColorMap } =
-      createColorMaps(allColorTokens);
+    const { light: lightColorMap, dark: darkColorMap }
+      = createColorMaps(allColorTokens);
 
     const typeScriptContent = generateTypeScriptContent(
       lightColorMap,
-      darkColorMap
+      darkColorMap,
     );
 
     const outputDirectory = path.dirname(outputFilePath);
@@ -186,7 +194,7 @@ function main() {
 
     console.log(`✅ Successfully generated ${outputFilePath}`);
     console.log(
-      `📊 Generated ${allColorTokens.length} color mappings for both light and dark themes`
+      `📊 Generated ${allColorTokens.length} color mappings for both light and dark themes`,
     );
   } catch (error) {
     console.error("❌ Error generating mapped colors:", error);

@@ -36,18 +36,25 @@ function Header({
 
   return (
     <Wrapper className={clsx(className)} {...delegated}>
-      <Logo />
-      <Actions>
-        <Action onClick={handleClick}>
-          {theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
-          <VisuallyHidden>Toggle dark / light mode</VisuallyHidden>
-        </Action>
-      </Actions>
+      <Content>
+
+        <Logo />
+        <Actions>
+          <Action onClick={handleClick}>
+            {theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
+            <VisuallyHidden>Toggle dark / light mode</VisuallyHidden>
+          </Action>
+        </Actions>
+      </Content>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.header`
+  background: var(--color-sky-from);
+`;
+
+const Content = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;

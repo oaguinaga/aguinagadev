@@ -52,6 +52,13 @@ export const LIGHT_COLORS_MAP: ColorMapRaw = {
   color_border_error_hover: COLORS_ALIAS.error_800,
   color_border_info_hover: COLORS_ALIAS.info_default,
   color_border_focus: COLORS_ALIAS.primary_default,
+  color_cloud_100: [203, 60, 95],
+  color_cloud_300: [202, 68, 92],
+  color_cloud_400: [201, 60, 86],
+  color_cloud_500: [200, 80, 83],
+  color_sky_from: [200, 70, 70],
+  color_sky_to: [200, 70, 78],
+  color_sky_subtle: [200, 90, 88],
 };
 
 export const DARK_COLORS_MAP: ColorMapRaw = {
@@ -67,7 +74,7 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   color_text_on_action: COLORS_ALIAS.neutrals_black,
   color_text_on_disabled: COLORS_ALIAS.neutrals_200,
   color_text_muted: COLORS_ALIAS.neutrals_default,
-  color_surface_page: COLORS_ALIAS.neutrals_1100,
+  color_surface_page: COLORS_ALIAS.neutrals_1150,
   color_surface_primary: COLORS_ALIAS.neutrals_1000,
   color_surface_info: COLORS_ALIAS.info_1000,
   color_surface_success: COLORS_ALIAS.success_1050,
@@ -104,4 +111,11 @@ export const DARK_COLORS_MAP: ColorMapRaw = {
   color_border_error_hover: COLORS_ALIAS.error_default,
   color_border_info_hover: COLORS_ALIAS.info_default,
   color_border_focus: COLORS_ALIAS.primary_600,
+  color_cloud_100: [216, 16, 6],
+  color_cloud_300: [213, 39, 9],
+  color_cloud_400: [214, 41, 10],
+  color_cloud_500: [214, 41, 12],
+  color_sky_from: [213, 39, 11],
+  color_sky_to: [200, 50, 30],
+  color_sky_subtle: [209, 41, 16],
 };

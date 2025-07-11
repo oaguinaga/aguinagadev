@@ -14,6 +14,7 @@ export const COLORS_BRAND: ColorMapRaw = {
   brand_gray_1000: [229, 14, 15],
   brand_gray_1050: [216, 16, 6],
   brand_gray_1100: [210, 15, 10],
+  brand_gray_1150: [210, 15, 6],
   brand_gray_default: [227, 7, 60],
   brand_black: [0, 0, 0],
   brand_white: [0, 0, 100],

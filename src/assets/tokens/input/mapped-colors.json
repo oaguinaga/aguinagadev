@@ -98,7 +98,7 @@
             "type": "color",
             "values": {
               "light": "alias:neutrals/white",
-              "dark": "alias:neutrals/1100"
+              "dark": "alias:neutrals/1150"
             }
           },
           "primary": {
@@ -355,6 +355,59 @@
             "values": {
               "light": "alias:primary/default",
               "dark": "alias:primary/600"
+            }
+          }
+        },
+        "cloud": {
+          "100": {
+            "type": "color",
+            "values": {
+              "dark": [216, 16, 6],
+              "light": [203, 60, 95]
+            }
+          },
+          "300": {
+            "type": "color",
+            "values": {
+              "dark": [213, 39, 9],
+              "light": [202, 68, 92]
+            }
+          },
+          "400": {
+            "type": "color",
+            "values": {
+              "dark": [214, 41, 10],
+              "light": [201, 60, 86]
+            }
+          },
+          "500": {
+            "type": "color",
+            "values": {
+              "dark": [214, 41, 12],
+              "light": [200, 80, 83]
+            }
+          }
+        },
+        "sky": {
+          "from": {
+            "type": "color",
+            "values": {
+              "dark": [213, 39, 11],
+              "light": [200, 70, 70]
+            }
+          },
+          "to": {
+            "type": "color",
+            "values": {
+              "dark": [200, 50, 30],
+              "light": [200, 70, 78]
+            }
+          },
+          "subtle": {
+            "type": "color",
+            "values": {
+              "dark": [209, 41, 16],
+              "light": [200, 90, 88]
             }
           }
         }
