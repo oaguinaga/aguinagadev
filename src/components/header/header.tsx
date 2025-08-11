@@ -2,15 +2,16 @@
 import type { ColorTheme } from "@/constants/constants";
 import clsx from "clsx";
 import Cookie from "js-cookie";
+import { usePathname } from "next/navigation";
 import * as React from "react";
+
 import { Moon, Sun } from "react-feather";
 
 import styled from "styled-components";
-
 import Logo from "@/components/logo";
 import { COLOR_THEME_COOKIE_NAME } from "@/constants/constants";
-import { applyThemeToRoot } from "@/utils/theme";
 
+import { applyThemeToRoot } from "@/utils/theme";
 import VisuallyHidden from "../visually-hidden";
 
 function Header({
@@ -35,19 +36,31 @@ function Header({
   }
 
   return (
-    <Wrapper className={clsx(className)} {...delegated}>
-      <Logo />
-      <Actions>
-        <Action onClick={handleClick}>
-          {theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
-          <VisuallyHidden>Toggle dark / light mode</VisuallyHidden>
-        </Action>
-      </Actions>
+    <Wrapper
+      className={clsx(className)}
+      {...delegated}
+      style={{
+        background: usePathname() === "/" ? "var(--color-sky-from)" : "var(--color-sky-subtle)",
+      }}
+    >
+      <Content>
+
+        <Logo />
+        <Actions>
+          <Action onClick={handleClick}>
+            {theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
+            <VisuallyHidden>Toggle dark / light mode</VisuallyHidden>
+          </Action>
+        </Actions>
+      </Content>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.header`
+`;
+
+const Content = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;

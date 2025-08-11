@@ -95,6 +95,7 @@ export const COLORS_ALIAS = {
   neutrals_1000: COLORS_BRAND.brand_gray_1000,
   neutrals_1050: COLORS_BRAND.brand_gray_1050,
   neutrals_1100: COLORS_BRAND.brand_gray_1100,
+  neutrals_1150: COLORS_BRAND.brand_gray_1150,
   neutrals_default: COLORS_BRAND.brand_gray_default,
   neutrals_white: COLORS_BRAND.brand_white,
   neutrals_black: COLORS_BRAND.brand_black,

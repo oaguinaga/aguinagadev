@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { Poppins, Space_Mono, Work_Sans } from "next/font/google";
 
 import { cookies } from "next/headers";
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
 import { BLOG_DESCRIPTION, BLOG_TITLE, COLOR_THEME_COOKIE_NAME, DEFAULT_COLOR_THEME } from "@/constants/constants";
@@ -67,6 +68,7 @@ export default async function RootLayout({
         <StyledComponentsRegistry>
           <Header initialTheme={theme} />
           <main>{children}</main>
+          <Footer />
         </StyledComponentsRegistry>
       </body>
     </html>
