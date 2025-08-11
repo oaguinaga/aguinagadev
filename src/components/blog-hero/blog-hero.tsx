@@ -19,8 +19,8 @@ function BlogHero({
   className?: string;
   category?: string;
 } & React.HTMLAttributes<HTMLDivElement>) {
-  const humanReadableDatePublished = format(new Date(publishedOn), "MMMM do, yyyy");
-  const humanReadableDateUpdated = updatedOn ? format(new Date(updatedOn), "MMMM do, yyyy") : null;
+  const human_readable_date_published = format(new Date(publishedOn), "MMMM do, yyyy");
+  const human_readable_date_updated = updatedOn ? format(new Date(updatedOn), "MMMM do, yyyy") : null;
 
   return (
     <Wrapper className={className} {...delegated}>
@@ -39,7 +39,7 @@ function BlogHero({
               <dt> on</dt>
               <dd>
                 <time dateTime={publishedOn}>
-                  {humanReadableDatePublished}
+                  {human_readable_date_published}
                 </time>
               </dd>
             </DataListItemWrapper>
@@ -51,7 +51,7 @@ function BlogHero({
                 <dt>Last updated on</dt>
                 <dd>
                   <time dateTime={updatedOn}>
-                    {humanReadableDateUpdated}
+                    {human_readable_date_updated}
                   </time>
                 </dd>
               </DataListItemWrapper>

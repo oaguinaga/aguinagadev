@@ -19,10 +19,10 @@ export function transformObject(obj: PlainObject, callback: (key: string, value:
   }
 
   return Object.entries(obj).reduce((acc, [key, value]) => {
-    const [newKey, newValue] = callback(key, value);
+    const [new_key, new_value] = callback(key, value);
     return {
       ...acc,
-      [newKey]: newValue,
+      [new_key]: new_value,
     };
   }, {});
 }
@@ -42,12 +42,12 @@ export function sample<T>(arr: Array<T>, len = 1): Array<T> {
 }
 
 export function random(min: number, max: number, { rounded }: { rounded: boolean } = { rounded: true }) {
-  const partialVal = Math.random() * (max - min);
+  const partial_val = Math.random() * (max - min);
 
   if (rounded) {
-    return Math.floor(partialVal) + min;
+    return Math.floor(partial_val) + min;
   } else {
-    return partialVal + min;
+    return partial_val + min;
   }
 }
 
@@ -63,10 +63,10 @@ export function clamp(value: number, min = 0, max = 1) {
   //
   // This is especially common with `clampedNormalize`.
   // In these cases, we'll flip the min/max so that the function works as expected.
-  const actualMin = Math.min(min, max);
-  const actualMax = Math.max(min, max);
+  const actual_min = Math.min(min, max);
+  const actual_max = Math.max(min, max);
 
-  return Math.max(actualMin, Math.min(actualMax, value));
+  return Math.max(actual_min, Math.min(actual_max, value));
 }
 
 export function roundTo(value: number, places = 0) {
@@ -121,15 +121,15 @@ export function delay(duration: number) {
 
 export function getTimeOfDay() {
   const now = new Date();
-  const hourOfDay = now.getHours();
+  const hour_of_day = now.getHours();
 
-  if (hourOfDay <= 4) {
+  if (hour_of_day <= 4) {
     return "night";
-  } else if (hourOfDay <= 11) {
+  } else if (hour_of_day <= 11) {
     return "morning";
-  } else if (hourOfDay <= 17) {
+  } else if (hour_of_day <= 17) {
     return "afternoon";
-  } else if (hourOfDay <= 21) {
+  } else if (hour_of_day <= 21) {
     return "evening";
   } else {
     return "night";

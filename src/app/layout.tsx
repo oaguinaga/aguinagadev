@@ -11,21 +11,21 @@ import { BLOG_DESCRIPTION, BLOG_TITLE, COLOR_THEME_COOKIE_NAME, DEFAULT_COLOR_TH
 import StyledComponentsRegistry from "@/lib/registry";
 import "./styles.css";
 
-const mainFont = Work_Sans({
+const MAIN_FONT = Work_Sans({
   subsets: ["latin"],
   display: "fallback",
   weight: "variable",
   variable: "--font-family",
 });
 
-const headingFont = Poppins({
+const HEADING_FONT = Poppins({
   subsets: ["latin"],
   display: "fallback",
   weight: ["400", "500", "600", "700"],
   variable: "--font-family-heading",
 });
 
-const monoFont = Space_Mono({
+const MONO_FONT = Space_Mono({
   subsets: ["latin"],
   display: "fallback",
   weight: ["400", "700"],
@@ -45,28 +45,28 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const savedTheme = (await cookies()).get(COLOR_THEME_COOKIE_NAME);
-  const theme = (savedTheme?.value || DEFAULT_COLOR_THEME) as ColorTheme;
+  const saved_theme = (await cookies()).get(COLOR_THEME_COOKIE_NAME);
+  const color_theme = (saved_theme?.value || DEFAULT_COLOR_THEME) as ColorTheme;
 
   return (
     <html
       lang="en"
       style={
-        (theme === "dark" ? DARK_COLORS : LIGHT_COLORS) as React.CSSProperties
+        (color_theme === "dark" ? DARK_COLORS : LIGHT_COLORS) as React.CSSProperties
       }
       className={clsx(
-        mainFont.variable,
-        headingFont.variable,
-        monoFont.variable,
+        MAIN_FONT.variable,
+        HEADING_FONT.variable,
+        MONO_FONT.variable,
       )}
-      data-color-theme={theme}
+      data-color-theme={color_theme}
     >
       <head>
         <link rel="icon" href="https://fav.farm/🤙🏽" />
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Header initialTheme={theme} />
+          <Header initialTheme={color_theme} />
           <main>{children}</main>
           <Footer />
         </StyledComponentsRegistry>

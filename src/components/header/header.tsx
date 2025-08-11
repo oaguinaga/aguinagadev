@@ -23,16 +23,16 @@ function Header({
   className?: string;
   delegated?: React.HTMLAttributes<HTMLDivElement>;
 }) {
-  const [theme, setTheme] = React.useState(initialTheme);
+  const [color_theme, set_color_theme] = React.useState(initialTheme);
 
   async function handleClick() {
-    const nextTheme = theme === "light" ? "dark" : "light";
+    const next_theme = color_theme === "light" ? "dark" : "light";
 
-    setTheme(nextTheme);
+    set_color_theme(next_theme);
 
-    await Cookie.set(COLOR_THEME_COOKIE_NAME, nextTheme, { expires: 1000 });
+    await Cookie.set(COLOR_THEME_COOKIE_NAME, next_theme, { expires: 1000 });
 
-    applyThemeToRoot(nextTheme);
+    applyThemeToRoot(next_theme);
   }
 
   return (
@@ -48,7 +48,7 @@ function Header({
         <Logo />
         <Actions>
           <Action onClick={handleClick}>
-            {theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
+            {color_theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
             <VisuallyHidden>Toggle dark / light mode</VisuallyHidden>
           </Action>
         </Actions>

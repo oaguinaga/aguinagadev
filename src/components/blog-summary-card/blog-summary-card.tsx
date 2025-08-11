@@ -13,7 +13,7 @@ function BlogSummaryCard({
   abstract,
   category = "GENERAL" as CategoryKey,
 }: BlogPost) {
-  const categoryLabel = CATEGORIES[category];
+  const category_label = CATEGORIES[category];
 
   return (
     <div className={styles.wrapper}>
@@ -22,7 +22,7 @@ function BlogSummaryCard({
         {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
       </Link>
       <p>{abstract}</p>
-      {category && <p className={styles.category}>{categoryLabel}</p>}
+      {category && <p className={styles.category}>{category_label}</p>}
 
       <Link href={`/${slug}`} className={styles.readMore}>
         Read more
