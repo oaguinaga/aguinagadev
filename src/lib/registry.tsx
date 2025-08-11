@@ -11,11 +11,11 @@ export default function StyledComponentsRegistry({
 }) {
   // Only create stylesheet once with lazy initial state
   // x-ref: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+  const [styled_components_style_sheet] = useState(() => new ServerStyleSheet());
 
   useServerInsertedHTML(() => {
-    const styles = styledComponentsStyleSheet.getStyleElement();
-    styledComponentsStyleSheet.instance.clearTag();
+    const styles = styled_components_style_sheet.getStyleElement();
+    styled_components_style_sheet.instance.clearTag();
     return <>{styles}</>;
   });
 
@@ -26,7 +26,7 @@ export default function StyledComponentsRegistry({
   return (
     <StyleSheetManager
       enableVendorPrefixes
-      sheet={styledComponentsStyleSheet.instance}
+      sheet={styled_components_style_sheet.instance}
     >
       {children}
     </StyleSheetManager>

@@ -15,19 +15,19 @@ export type BlogPost = {
 };
 
 export async function getBlogPostList(): Promise<BlogPost[]> {
-  const fileNames = await readDirectory("/content");
-  const blogPosts: BlogPost[] = [];
+  const file_names = await readDirectory("/content");
+  const blog_posts: BlogPost[] = [];
 
-  for (const fileName of fileNames) {
-    const rawContent = await readFile(`/content/${fileName}`);
-    const { data: frontmatter } = matter(rawContent);
-    blogPosts.push({
-      slug: fileName.replace(/\.mdx$/, ""),
+  for (const file_name of file_names) {
+    const raw_content = await readFile(`/content/${file_name}`);
+    const { data: frontmatter } = matter(raw_content);
+    blog_posts.push({
+      slug: file_name.replace(/\.mdx$/, ""),
       ...frontmatter,
     } as BlogPost);
   }
 
-  return blogPosts.sort((a, b) => {
+  return blog_posts.sort((a, b) => {
     if (a.publishedOn && b.publishedOn) {
       return new Date(b.publishedOn).getTime() - new Date(a.publishedOn).getTime();
     }
@@ -35,10 +35,10 @@ export async function getBlogPostList(): Promise<BlogPost[]> {
   });
 }
 
-export const loadBlogPost = React.cache(async (postSlug: string) => {
-  const rawContent = await readFile(`/content/${postSlug}.mdx`);
+export const loadBlogPost = React.cache(async (post_slug: string) => {
+  const raw_content = await readFile(`/content/${post_slug}.mdx`);
 
-  const { data: frontmatter, content } = matter(rawContent);
+  const { data: frontmatter, content } = matter(raw_content);
 
   return {
     frontmatter,
@@ -46,10 +46,10 @@ export const loadBlogPost = React.cache(async (postSlug: string) => {
   };
 });
 
-function readFile(localPath: string) {
-  return fs.readFile(path.join(process.cwd(), localPath), "utf-8");
+function readFile(local_path: string) {
+  return fs.readFile(path.join(process.cwd(), local_path), "utf-8");
 }
 
-function readDirectory(localPath: string) {
-  return fs.readdir(path.join(process.cwd(), localPath));
+function readDirectory(local_path: string) {
+  return fs.readdir(path.join(process.cwd(), local_path));
 }
