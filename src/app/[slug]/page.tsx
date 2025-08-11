@@ -17,6 +17,7 @@ async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
         updatedOn={post.frontmatter.updatedOn}
         category={post.frontmatter.category}
       />
+
       <div className={styles.page}>
         <MDXRemote
           source={post.content}

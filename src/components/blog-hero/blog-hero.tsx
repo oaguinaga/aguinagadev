@@ -3,6 +3,7 @@
 import { format } from "date-fns";
 import * as React from "react";
 import styled from "styled-components";
+import { BlogClouds } from "../clouds";
 
 function BlogHero({
   title,
@@ -23,43 +24,56 @@ function BlogHero({
 
   return (
     <Wrapper className={className} {...delegated}>
-      <h1>{title}</h1>
-      <MetaData>
-        <DataList>
-          {category && (
-            <DataListItemWrapper>
-              <dt>Filed under</dt>
-              <dd>{category}</dd>
-            </DataListItemWrapper>
-          )}
-          <DataListItemWrapper>
-            <dt> on</dt>
-            <dd>
-              <time dateTime={publishedOn}>
-                {humanReadableDatePublished}
-              </time>
-            </dd>
-          </DataListItemWrapper>
-        </DataList>
-        {updatedOn && (
+      <Content>
+        <h1>{title}</h1>
 
+        <MetaData>
           <DataList>
+            {category && (
+              <DataListItemWrapper>
+                <dt>Filed under</dt>
+                <dd>{category}</dd>
+              </DataListItemWrapper>
+            )}
             <DataListItemWrapper>
-              <dt>Last updated on</dt>
+              <dt> on</dt>
               <dd>
-                <time dateTime={updatedOn}>
-                  {humanReadableDateUpdated}
+                <time dateTime={publishedOn}>
+                  {humanReadableDatePublished}
                 </time>
               </dd>
             </DataListItemWrapper>
           </DataList>
-        )}
-      </MetaData>
+          {updatedOn && (
+
+            <DataList>
+              <DataListItemWrapper>
+                <dt>Last updated on</dt>
+                <dd>
+                  <time dateTime={updatedOn}>
+                    {humanReadableDateUpdated}
+                  </time>
+                </dd>
+              </DataListItemWrapper>
+            </DataList>
+          )}
+        </MetaData>
+      </Content>
+
+      <BlogClouds />
     </Wrapper>
   );
 }
 
 const Wrapper = styled.header`
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  width: 100%;
+  height: 100%;
+  background: var(--color-sky-subtle);
+
+
   font-family: var(--font-family-heading);
   display: flex;  
   flex-direction: column;
@@ -69,10 +83,16 @@ const Wrapper = styled.header`
   text-align: center;
 `;
 
+const Content = styled.div`
+  max-width: 60rem;
+
+`;
+
 const MetaData = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 8rem;
 `;
 
 const DataListItemWrapper = styled.div`

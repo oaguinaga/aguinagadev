@@ -1,5 +1,5 @@
 import BlogSummaryCard from "@/components/blog-summary-card";
-import HeaderClouds from "@/components/header-clouds";
+import { HeaderClouds } from "@/components/clouds";
 
 import { getBlogPostList } from "@/helpers/file-helpers";
 import styles from "./homepage.module.css";

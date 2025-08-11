@@ -2,15 +2,16 @@
 import type { ColorTheme } from "@/constants/constants";
 import clsx from "clsx";
 import Cookie from "js-cookie";
+import { usePathname } from "next/navigation";
 import * as React from "react";
+
 import { Moon, Sun } from "react-feather";
 
 import styled from "styled-components";
-
 import Logo from "@/components/logo";
 import { COLOR_THEME_COOKIE_NAME } from "@/constants/constants";
-import { applyThemeToRoot } from "@/utils/theme";
 
+import { applyThemeToRoot } from "@/utils/theme";
 import VisuallyHidden from "../visually-hidden";
 
 function Header({
@@ -35,7 +36,13 @@ function Header({
   }
 
   return (
-    <Wrapper className={clsx(className)} {...delegated}>
+    <Wrapper
+      className={clsx(className)}
+      {...delegated}
+      style={{
+        background: usePathname() === "/" ? "var(--color-sky-from)" : "var(--color-sky-subtle)",
+      }}
+    >
       <Content>
 
         <Logo />
@@ -51,7 +58,6 @@ function Header({
 }
 
 const Wrapper = styled.header`
-  background: var(--color-sky-from);
 `;
 
 const Content = styled.div`
