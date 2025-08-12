@@ -16,6 +16,6 @@ export const Default: Story = {
     title: "JavaScript Closures",
     subtitle: "A blog post about closures in JavaScript",
     abstract: "This is a blog post about closures in JavaScript",
-    category: "JavaScript",
+    category: "JAVASCRIPT",
   },
 };

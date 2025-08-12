@@ -8,10 +8,10 @@ export const COLOR_THEME_COOKIE_NAME = "color-theme";
 export const CATEGORIES = {
   JAVASCRIPT: "JavaScript",
   REACT: "React",
-  ANIMATION: "Animation",
-  SHOPIFY: "Shopify",
+  PROJECTS: "Projects",
   CSS: "CSS",
   GENERAL: "General",
+  SHOPIFY: "Shopify",
 } as const;
 export type CategoryKey = keyof typeof CATEGORIES;
 export type Category = (typeof CATEGORIES)[keyof typeof CATEGORIES];
