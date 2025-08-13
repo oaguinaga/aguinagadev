@@ -9,6 +9,7 @@ import Header from "@/components/header";
 import { DARK_COLORS, LIGHT_COLORS } from "@/constants/colors";
 import { BLOG_DESCRIPTION, BLOG_TITLE, COLOR_THEME_COOKIE_NAME, DEFAULT_COLOR_THEME } from "@/constants/constants";
 import StyledComponentsRegistry from "@/lib/registry";
+import ThemeProvider from "@/provider/theme-provider";
 import "./styles.css";
 
 const MAIN_FONT = Work_Sans({
@@ -45,30 +46,32 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const saved_theme = (await cookies()).get(COLOR_THEME_COOKIE_NAME);
-  const color_theme = (saved_theme?.value || DEFAULT_COLOR_THEME) as ColorTheme;
+  const savedTheme = (await cookies()).get(COLOR_THEME_COOKIE_NAME);
+  const colorTheme = (savedTheme?.value || DEFAULT_COLOR_THEME) as ColorTheme;
 
   return (
     <html
       lang="en"
       style={
-        (color_theme === "dark" ? DARK_COLORS : LIGHT_COLORS) as React.CSSProperties
+        (colorTheme === "dark" ? DARK_COLORS : LIGHT_COLORS) as React.CSSProperties
       }
       className={clsx(
         MAIN_FONT.variable,
         HEADING_FONT.variable,
         MONO_FONT.variable,
       )}
-      data-color-theme={color_theme}
+      data-color-theme={colorTheme}
     >
       <head>
         <link rel="icon" href="https://fav.farm/🤙🏽" />
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Header initialTheme={color_theme} />
-          <main>{children}</main>
-          <Footer />
+          <ThemeProvider initialTheme={colorTheme}>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

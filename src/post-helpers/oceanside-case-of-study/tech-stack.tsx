@@ -1,7 +1,11 @@
 "use client";
 
 import styled from "styled-components";
+import BetterAuthLogo from "./logos/better-auth";
+import DaisyUILogo from "./logos/daisy-ui";
+import DrizzleLogo from "./logos/drizzle";
 import NuxtLogo from "./logos/nuxt-logo";
+import TailwindLogo from "./logos/tailwind";
 import TypescriptLogo from "./logos/typescript-logo";
 import VueLogo from "./logos/vue-logo";
 
@@ -11,11 +15,11 @@ function TechStack() {
       <TechCard logo={<NuxtLogo />} title="Nuxt" version="3.17.7" link="https://nuxt.com/" />
       <TechCard logo={<VueLogo />} title="Vue" version="3.5.17" link="https://vuejs.org/" />
       <TechCard logo={<TypescriptLogo />} title="Typescript" version="5.7.3" link="https://www.typescriptlang.org/" />
-      <TechCard title="Better Auth" variant="secondary" version="1.2.12" link="https://better-auth.com/" />
-      <TechCard title="Dizzle" variant="secondary" version="0.44.3" link="https://dizzle.dev/" />
-      <TechCard title="Tailwind" variant="secondary" version="4.1.11" link="https://tailwindcss.com/" />
+      <TechCard logo={<BetterAuthLogo />} title="Better Auth" variant="secondary" version="1.2.12" link="https://better-auth.com/" />
+      <TechCard logo={<DrizzleLogo />} title="Dizzle" variant="secondary" version="0.44.3" link="https://dizzle.dev/" />
+      <TechCard logo={<TailwindLogo />} title="Tailwind" variant="secondary" version="4.1.11" link="https://tailwindcss.com/" />
+      <TechCard logo={<DaisyUILogo />} title="Daisy UI" variant="secondary" version="3.11.1" link="https://daisyui.com/" />
       <TechCard title="Pinia" variant="secondary" version="3.0.3" link="https://pinia.vuejs.org/" />
-      <TechCard title="Daisy UI" variant="secondary" version="3.11.1" link="https://daisyui.com/" />
       <TechCard title="VeeValidate" variant="secondary" version="4.15.1" link="https://vee-validate.logaretm.com/" />
       <TechCard title="Zod" variant="secondary" version="4.0.5" link="https://zod.dev/" />
       <TechCard title="Map libre" variant="secondary" version="5.6.1" link="https://maplibre.org/" />
@@ -113,7 +117,7 @@ const Card = styled.div`
     grid-column: span 3;
 
     @media(max-width: 576px) {
-      grid-column: span 12;
+      grid-column: span 6;
 
       .version {
         display: none;
@@ -149,6 +153,10 @@ const Card = styled.div`
       text-decoration: underline;
 
      }
+    }
+
+    @media(max-width: 576px) {
+      font-size: 0.8rem;
     }
   }
 `;

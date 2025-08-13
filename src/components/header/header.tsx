@@ -1,5 +1,4 @@
 "use client";
-import type { ColorTheme } from "@/constants/constants";
 import clsx from "clsx";
 import Cookie from "js-cookie";
 import { usePathname } from "next/navigation";
@@ -11,28 +10,27 @@ import styled from "styled-components";
 import Logo from "@/components/logo";
 import { COLOR_THEME_COOKIE_NAME } from "@/constants/constants";
 
+import { ThemeContext } from "@/provider/theme-provider";
 import { applyThemeToRoot } from "@/utils/theme";
 import VisuallyHidden from "../visually-hidden";
 
 function Header({
-  initialTheme,
   className,
   ...delegated
 }: {
-  initialTheme: ColorTheme;
   className?: string;
   delegated?: React.HTMLAttributes<HTMLDivElement>;
 }) {
-  const [color_theme, set_color_theme] = React.useState(initialTheme);
+  const { colorTheme, setColorTheme } = React.use(ThemeContext)!;
 
   async function handleClick() {
-    const next_theme = color_theme === "light" ? "dark" : "light";
+    const nextTheme = colorTheme === "light" ? "dark" : "light";
 
-    set_color_theme(next_theme);
+    setColorTheme(nextTheme);
 
-    await Cookie.set(COLOR_THEME_COOKIE_NAME, next_theme, { expires: 1000 });
+    await Cookie.set(COLOR_THEME_COOKIE_NAME, nextTheme, { expires: 1000 });
 
-    applyThemeToRoot(next_theme);
+    applyThemeToRoot(nextTheme);
   }
 
   return (
@@ -48,7 +46,7 @@ function Header({
         <Logo />
         <Actions>
           <Action onClick={handleClick}>
-            {color_theme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
+            {colorTheme === "light" ? <Sun size="1.5rem" /> : <Moon size="1.5rem" />}
             <VisuallyHidden>Toggle dark / light mode</VisuallyHidden>
           </Action>
         </Actions>

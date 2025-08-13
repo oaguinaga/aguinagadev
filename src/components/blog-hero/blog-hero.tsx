@@ -1,9 +1,10 @@
 "use client";
 
+import type { CategoryKey } from "@/constants/constants";
 import { format } from "date-fns";
 import * as React from "react";
 import styled from "styled-components";
-import { BREAKPOINTS } from "@/constants/constants";
+import { BREAKPOINTS, CATEGORIES } from "@/constants/constants";
 import { BlogClouds } from "../clouds";
 
 function BlogHero({
@@ -35,7 +36,7 @@ function BlogHero({
             {category && (
               <DataListItemWrapper>
                 <dt>Filed under</dt>
-                <dd>{category}</dd>
+                <dd>{CATEGORIES[category as CategoryKey]}</dd>
               </DataListItemWrapper>
             )}
             <DataListItemWrapper>
@@ -87,6 +88,8 @@ const Wrapper = styled.header`
 `;
 
 const Content = styled.div`
+  margin-top: 4rem;
+  margin-bottom: 8rem;
   max-width: 60rem; 
   display: flex;
   flex-direction: column;
@@ -106,13 +109,13 @@ const Content = styled.div`
       font-size: 1.5rem;
     }
   }
+
 `;
 
 const MetaData = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 8rem;
 `;
 
 const DataListItemWrapper = styled.div`

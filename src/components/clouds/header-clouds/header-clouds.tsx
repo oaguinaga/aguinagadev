@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   isolation: isolate;
   overflow: clip;
   width: 100%;
-  height: 100%;
+  height: auto;
 
   background: linear-gradient(
     to bottom,
