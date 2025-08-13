@@ -11,6 +11,7 @@ function FooterBottomCloud() {
 }
 
 const Wrapper = styled.div`
+  pointer-events: none;
   svg {
     position: absolute;
     right: 50%;

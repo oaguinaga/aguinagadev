@@ -13,6 +13,7 @@ function BlogClouds() {
 }
 
 const Clouds = styled.div`
+  pointer-events: none;
   position: absolute;
   bottom: 0;
   left: 0;

@@ -37,6 +37,7 @@ function HeaderClouds() {
 export default HeaderClouds;
 
 const Wrapper = styled.div`
+  pointer-events: none;
   position: relative;
   isolation: isolate;
   overflow: clip;
@@ -51,6 +52,7 @@ const Wrapper = styled.div`
 `;
 
 const Cloud = styled.div`
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
