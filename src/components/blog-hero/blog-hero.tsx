@@ -110,6 +110,17 @@ const Content = styled.div`
     }
   }
 
+  .subtitle {
+    font-size: 1.2rem;
+    max-width: 36rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+    line-height: 1.2;
+
+    @media ${BREAKPOINTS.mdAndLarger} {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 const MetaData = styled.div`
