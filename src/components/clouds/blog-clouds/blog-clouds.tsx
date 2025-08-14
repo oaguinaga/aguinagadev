@@ -13,6 +13,7 @@ function BlogClouds() {
 }
 
 const Clouds = styled.div`
+  pointer-events: none;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -20,7 +21,7 @@ const Clouds = styled.div`
   isolation: isolate;
   overflow: clip;
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

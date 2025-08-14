@@ -1,12 +1,15 @@
 "use client";
 
+import type { CategoryKey } from "@/constants/constants";
 import { format } from "date-fns";
 import * as React from "react";
 import styled from "styled-components";
+import { BREAKPOINTS, CATEGORIES } from "@/constants/constants";
 import { BlogClouds } from "../clouds";
 
 function BlogHero({
   title,
+  subtitle,
   publishedOn,
   updatedOn,
   className,
@@ -14,6 +17,7 @@ function BlogHero({
   ...delegated
 }: {
   title: string;
+  subtitle?: string;
   publishedOn: string;
   updatedOn?: string;
   className?: string;
@@ -26,13 +30,13 @@ function BlogHero({
     <Wrapper className={className} {...delegated}>
       <Content>
         <h1>{title}</h1>
-
+        {subtitle && <p className="subtitle">{subtitle}</p>}
         <MetaData>
           <DataList>
             {category && (
               <DataListItemWrapper>
                 <dt>Filed under</dt>
-                <dd>{category}</dd>
+                <dd>{CATEGORIES[category as CategoryKey]}</dd>
               </DataListItemWrapper>
             )}
             <DataListItemWrapper>
@@ -84,7 +88,27 @@ const Wrapper = styled.header`
 `;
 
 const Content = styled.div`
-  max-width: 60rem;
+  margin-top: 4rem;
+  margin-bottom: 8rem;
+  max-width: 60rem; 
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .subtitle {
+    font-size: 1.2rem;
+    max-width: 36rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+    line-height: 1.2;
+
+    @media ${BREAKPOINTS.mdAndLarger} {
+      font-size: 1.5rem;
+    }
+  }
 
 `;
 
@@ -92,7 +116,6 @@ const MetaData = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 8rem;
 `;
 
 const DataListItemWrapper = styled.div`

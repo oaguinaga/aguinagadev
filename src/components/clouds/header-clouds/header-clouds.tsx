@@ -37,11 +37,12 @@ function HeaderClouds() {
 export default HeaderClouds;
 
 const Wrapper = styled.div`
+  pointer-events: none;
   position: relative;
   isolation: isolate;
   overflow: clip;
   width: 100%;
-  height: 100%;
+  height: auto;
 
   background: linear-gradient(
     to bottom,
@@ -51,6 +52,7 @@ const Wrapper = styled.div`
 `;
 
 const Cloud = styled.div`
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;

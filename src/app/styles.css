@@ -128,16 +128,25 @@ html {
 }
 
 /* GLOBAL STYLES */
+
+/* Scrollbar and selection styles */
+html[data-color-theme="light"] {
+  --selection-background-color: hsl(50deg 100% 78%);
+  --selection-text-color: black;
+  --scrollbar-bg: var(--color-background);
+  --scrollbar-thumb: var(--color-cloud-700);
+  --scrollbar-thumb-hover: var(--color-gray-500);
+}
+html[data-color-theme="dark"] {
+  --selection-background-color: hsla(249, 88%, 64%, 0.35);
+  --selection-text-color: inherit;
+  --scrollbar-bg: var(--color-background);
+  --scrollbar-thumb: var(--color-gray-400);
+  --scrollbar-thumb-hover: var(--color-gray-500);
+}
 ::selection {
-  background-color: var(--color-selection-background) !important;
-  color: var(--color-selection-text) !important;
-  background-image: none !important;
-  -webkit-text-fill-color: var(--color-selection-text) !important;
-  -moz-text-fill-color: var(--color-selection-text) !important;
-  background-image: none !important;
-  background-clip: revert !important;
-  -webkit-background-clip: revert !important;
-  text-shadow: none !important;
+  background-color: var(--selection-background-color);
+  color: var(--selection-text-color);
 }
 
 html {
@@ -159,11 +168,12 @@ body {
 body::before {
   content: "";
   position: absolute;
-  z-index: 0;
+  z-index: -1;
   top: 0;
   left: 0;
   right: 0;
   height: 50vh;
+  pointer-events: none;
   background: linear-gradient(to top, var(--color-backdrop), var(--color-backdrop-highlight));
 }
 
