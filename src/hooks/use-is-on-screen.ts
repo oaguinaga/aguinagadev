@@ -11,7 +11,7 @@ type Options = {
   disabled?: boolean;
 };
 
-export default function useIsOnscreen(
+export default function useIsOnScreen(
   elementRef: React.RefObject<HTMLElement | undefined>,
   defaultState: boolean = false,
   options: Options = {

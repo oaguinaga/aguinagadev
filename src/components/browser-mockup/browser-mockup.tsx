@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import React, { useMemo, useRef } from "react";
 import styled from "styled-components";
-import useIsOnscreen from "@/hooks/use-is-on-screen";
+import useIsOnScreen from "@/hooks/use-is-on-screen";
 
 export type BrowserMockupProps = {
   src: string;
@@ -35,7 +35,7 @@ export const BrowserMockup: React.FC<BrowserMockupProps> = ({
   alt,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const isInView = useIsOnscreen(
+  const isInView = useIsOnScreen(
     // Narrow to the hook's expected type
     containerRef as unknown as React.RefObject<HTMLElement | undefined>,
     false,

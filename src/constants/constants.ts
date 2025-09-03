@@ -12,6 +12,7 @@ export const CATEGORIES = {
   CSS: "CSS",
   GENERAL: "General",
   SHOPIFY: "Shopify",
+  HELLO: "Hello",
 } as const;
 export type CategoryKey = keyof typeof CATEGORIES;
 export type Category = (typeof CATEGORIES)[keyof typeof CATEGORIES];

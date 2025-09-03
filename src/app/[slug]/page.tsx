@@ -20,7 +20,7 @@ async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
         category={post.frontmatter.category}
       />
 
-      <div className={styles.page}>
+      <div className={`${styles.page} ${post.frontmatter.category} ${slug === "hello-world" ? styles.helloWorld : ""}`}>
         <MDXRemote
           source={post.content}
           components={MDX_COMPONENT_MAP}
