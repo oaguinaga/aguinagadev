@@ -15,7 +15,7 @@ export default async function Home() {
       <div className={styles.wrapper}>
         <div className={styles.sidebar}>
           <div className={`${styles.banner} ${styles.gradient}`}>
-            <span>Pianopal</span>
+            <a href="https://pianopal.io" target="_blank" rel="noopener noreferrer"><span>Pianopal.io</span></a>
             <div className={styles.bannerContent}>
               <div>
                 <p>

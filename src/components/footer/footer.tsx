@@ -71,8 +71,8 @@ const Content = styled.div`
   display: grid;
   grid-template-areas:
   "intro empty"
-  "email links"
-  "copyright links";
+  "email email"
+  "links links";
 
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
