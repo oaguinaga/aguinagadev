@@ -3,6 +3,7 @@ import { BrowserMockup } from "@/components/browser-mockup";
 import CodeSnippet from "@/components/code-snippet";
 import { SectionHeading, SectionSubHeading, SectionSubSubHeading } from "@/components/content-heading";
 import List, { ListItem } from "@/components/list";
+import ProfileImg from "@/components/profile-img";
 import OceansideTechStack from "@/post-helpers/oceanside-case-of-study/tech-stack";
 
 const Ul = (props: React.ComponentPropsWithoutRef<"ul">) =>
@@ -27,4 +28,5 @@ export const MDX_COMPONENT_MAP = {
   // helpers for blog posts
   OceansideTechStack,
   BrowserMockup,
+  ProfileImg,
 };

@@ -1,6 +1,9 @@
 "use client";
-import { GitHub, Linkedin, Twitter } from "react-feather";
+import { GitHub, Linkedin, Mail, Twitter } from "react-feather";
 import styled from "styled-components";
+import Arrow from "@/components/doodle/arrow/arrow";
+import Plane from "@/components/doodle/plane/plane";
+import Logo from "../logo";
 import FooterBottomCloud from "./footer-bottom-cloud";
 import FooterTopCloud from "./footer-top-cloud";
 
@@ -11,28 +14,35 @@ function Footer() {
       <Content>
 
         <Intro>
-          <p>
-            Omar Aguiñaga
-          </p>
-          <p>
-            Software Engineer
-          </p>
+          <Logo />
         </Intro>
 
         <Email>
-          <p>
-            Email
-          </p>
+          <div>
+
+            <span>
+              Get in touch
+            </span>
+            <Arrow className="arrow" />
+            <a href="mailto:og.aguinaga@gmail.com">og.aguinaga@gmail.com</a>
+          </div>
+          <Plane className="plane" />
         </Email>
 
         <Links>
-          <p>
-            Links
-          </p>
           <Social>
-            <Linkedin />
-            <Twitter />
-            <GitHub />
+            <a href="https://www.linkedin.com/in/oaguinaga/" target="_blank" rel="noopener noreferrer">
+              <Linkedin />
+            </a>
+            <a href="https://x.com/aguinaga_dev" target="_blank" rel="noopener noreferrer">
+              <Twitter />
+            </a>
+            <a href="https://github.com/oaguinaga" target="_blank" rel="noopener noreferrer">
+              <GitHub />
+            </a>
+            <a href="mailto:og.aguinaga@gmail.com">
+              <Mail />
+            </a>
           </Social>
         </Links>
 
@@ -73,10 +83,42 @@ const Content = styled.div`
 
 const Intro = styled.div`
   grid-area: intro;
-`;
+
+  `;
 
 const Email = styled.div`
-  grid-area: email;
+margin-left: 4rem;
+display: flex;
+grid-area: email;
+position: relative;
+.arrow {
+  position: absolute;
+   height: 3rem;
+   top: 0;
+   left: -3rem;
+ }
+.plane {
+  margin-bottom: 2.5rem;
+  margin-left: 1rem;
+    height: 2.5rem;
+    width: auto;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    margin-top: 0.5rem;
+    text-decoration: none;
+  }
+
+  span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text-body);
+  }
 `;
 
 const Links = styled.div`

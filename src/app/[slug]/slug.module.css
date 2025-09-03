@@ -10,6 +10,7 @@
   grid-template-columns:
     1fr min(var(--trimmed-content-width), 100%)
     1fr;
+
   max-width: var(--outer-content-width);
   margin: 0 auto;
   padding: 64px var(--viewport-padding) 32px;
@@ -19,4 +20,47 @@
 
 .page > * {
   grid-column: 2;
+}
+
+/* Two-column layout for hello-world post */
+.helloWorld {
+  display: grid;
+  grid-template-columns: 8fr 2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.helloWorld > * {
+  grid-column: 1;
+}
+
+/* Profile image in the right column */
+.helloWorld :global(.profile-img-wrapper) {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Mobile responsiveness - single column on mobile */
+@media (max-width: 768px) {
+  .helloWorld {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .helloWorld > * {
+    grid-column: 1;
+  }
+
+  .helloWorld :global(.profile-img-wrapper) {
+    grid-column: 1;
+    position: static;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
 }

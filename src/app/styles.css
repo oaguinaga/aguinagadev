@@ -51,10 +51,10 @@ h6 {
 
 /* THEME VARIABLES */
 html {
-  --content-width: 55rem;
+  --content-width: 68.75rem;
   --outer-content-width: 80rem;
   --viewport-padding: 1rem;
-  --header-height: 5rem;
+  --header-height: 8rem;
   --trimmed-content-width: calc(var(--content-width) - var(--viewport-padding) * 2);
   --color-transparent: transparent;
 
@@ -119,6 +119,9 @@ html {
   /* Font weights */
   --font-weight-semibold: 600;
   --font-weight-regular: 400;
+
+  /* Colors */
+  --color-black: #1e272e;
 }
 
 @media (min-width: 35rem) {
