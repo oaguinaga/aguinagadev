@@ -8,11 +8,21 @@ import styles from "./homepage.module.css";
 
 export default async function Home() {
   const posts = await getBlogPostList();
+  const [firstPost, ...remainingPosts] = posts;
 
   return (
     <div>
       <HeaderClouds />
       <div className={styles.wrapper}>
+        {/* Mobile/Tablet: First post appears first */}
+        <div className={styles.firstPost}>
+          <BlogSummaryCard
+            key={firstPost.slug}
+            {...firstPost}
+          />
+        </div>
+
+        {/* Mobile/Tablet: Banner appears second */}
         <div className={styles.sidebar}>
           <div className={`${styles.banner} ${styles.gradient}`}>
             <a href="https://pianopal.io" target="_blank" rel="noopener noreferrer"><span>Pianopal.io</span></a>
@@ -46,6 +56,17 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Mobile/Tablet: Remaining posts appear third */}
+        <div className={styles.remainingPosts}>
+          {remainingPosts.map(post => (
+            <BlogSummaryCard
+              key={post.slug}
+              {...post}
+            />
+          ))}
+        </div>
+
+        {/* Desktop: All posts in main area */}
         <div className={styles.main}>
           {posts.map(post => (
             <BlogSummaryCard
