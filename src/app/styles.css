@@ -71,50 +71,50 @@ html {
   --breakpoint-xl: 1280px;
 
   /* Font sizes */
-  --font-size-body-xs: 0.5rem;
-  --font-size-body-sm: 0.75rem;
+  --font-size-body-xs: 0.5625rem;
+  --font-size-body-sm: 0.84375rem;
   --font-size-body-md: 1.125rem;
-  --font-size-body-lg: 1.25rem;
+  --font-size-body-lg: 1.40625rem;
 
   /* Heading font sizes (h1 to h6) */
-  --font-size-h1: 3.75rem;
-  --font-size-h2: 3rem;
-  --font-size-h3: 2.5rem;
-  --font-size-h4: 2rem;
-  --font-size-h5: 1.5rem;
-  --font-size-h6: 1.25rem;
+  --font-size-h1: 4.21875rem;
+  --font-size-h2: 3.375rem;
+  --font-size-h3: 2.8125rem;
+  --font-size-h4: 2.25rem;
+  --font-size-h5: 1.6875rem;
+  --font-size-h6: 1.40625rem;
 
   /* Headings mobile */
-  --font-size-h1-mobile: 2.25rem;
-  --font-size-h2-mobile: 1.75rem;
-  --font-size-h3-mobile: 1.5rem;
+  --font-size-h1-mobile: 2.53125rem;
+  --font-size-h2-mobile: 1.96875rem;
+  --font-size-h3-mobile: 1.6875rem;
 
   /* Line heights */
-  --line-height-body-xs: 1rem;
-  --line-height-body-sm: 1.25rem;
-  --line-height-body-md: 1.6rem;
-  --line-height-body-lg: 2rem;
-  --line-height-h1: 4.5rem;
-  --line-height-h2: 3.5rem;
-  --line-height-h3: 3rem;
-  --line-height-h1-mobile: 2.5rem;
-  --line-height-h2-mobile: 2rem;
-  --line-height-h3-mobile: 1.75rem;
-  --line-height-h4: 2.5rem;
-  --line-height-h5: 1.75rem;
-  --line-height-h6: 1.5rem;
+  --line-height-body-xs: 1.125rem;
+  --line-height-body-sm: 1.40625rem;
+  --line-height-body-md: 1.6875rem;
+  --line-height-body-lg: 2.25rem;
+  --line-height-h1: 5.0625rem;
+  --line-height-h2: 3.9375rem;
+  --line-height-h3: 3.375rem;
+  --line-height-h1-mobile: 2.8125rem;
+  --line-height-h2-mobile: 2.25rem;
+  --line-height-h3-mobile: 1.96875rem;
+  --line-height-h4: 2.8125rem;
+  --line-height-h5: 1.96875rem;
+  --line-height-h6: 1.6875rem;
 
   /* Paragraph spacing */
-  --paragraph-spacing-body-xs: 0.75rem;
-  --paragraph-spacing-body-sm: 1rem;
+  --paragraph-spacing-body-xs: 0.84375rem;
+  --paragraph-spacing-body-sm: 1.125rem;
   --paragraph-spacing-body-md: 1.125rem;
-  --paragraph-spacing-body-lg: 1.25rem;
-  --paragraph-spacing-h1: 3rem;
-  --paragraph-spacing-h2: 2.5rem;
-  --paragraph-spacing-h3: 2.25rem;
-  --paragraph-spacing-h4: 2rem;
-  --paragraph-spacing-h5: 1.75rem;
-  --paragraph-spacing-h6: 1.5rem;
+  --paragraph-spacing-body-lg: 1.40625rem;
+  --paragraph-spacing-h1: 3.375rem;
+  --paragraph-spacing-h2: 2.8125rem;
+  --paragraph-spacing-h3: 2.53125rem;
+  --paragraph-spacing-h4: 2.25rem;
+  --paragraph-spacing-h5: 1.96875rem;
+  --paragraph-spacing-h6: 1.6875rem;
 
   /* Font weights */
   --font-weight-semibold: 600;

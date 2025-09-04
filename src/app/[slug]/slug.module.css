@@ -37,12 +37,16 @@
 /* Profile image in the right column */
 .helloWorld :global(.profile-img-wrapper) {
   grid-column: 2;
-  grid-row: 1;
   position: sticky;
   top: 2rem;
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  grid-row: 2;
+
+  @media (min-width: 768px) {
+    margin-top: -50%;
+  }
 }
 
 /* Mobile responsiveness - single column on mobile */
